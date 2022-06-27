@@ -1,14 +1,36 @@
 @import "../../settings";
 @import url('https://fonts.googleapis.com/css?family=Manjari:400,700&display=swap');
-
+@import 'react-calendar/dist/Calendar.css';
 body {
   font-family: Manjari, sans-serif;
   font-size: 14px;
+  .filter-column{
+    display: block;
+    .calendar {
+      width: $width-calendar;
+      height : $height-calendar;
+      border-radius: $task-border-radius;
+    }
+  }
+  .list-hashtag{;
+    margin-top: 5px;
+    height:calc(100% - #{$height-calendar});
+    background-color: white;
+    border-radius: $task-border-radius;
+    padding: 8px 5px 0 10px;
+    overflow-y :auto;
+    font-weight: bold;
+    > * {
+      padding: 10px 5px 0 10px;
+      color: black;
+      text-align:left;
+      font-size: 15px;
+      font-weight: normal;
+    }
+    .add-new-hashtag{
+      color: gray;
+      font-weight: bold;
+    }
+  }
 }
 
-.calendar {
-  width: 350px;
-  margin: 100px auto 0;
-  box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, .1);
-  border-radius: 6px;
-}

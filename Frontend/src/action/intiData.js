@@ -1,3 +1,4 @@
+
 export const initData = {
     boards:[
         {
@@ -246,4 +247,20 @@ export const initData = {
             ]
         }
     ]
+}
+export const initHashtag = {
+    hashtaglists:
+        {
+            HashtagOrder:['hashtag-1','hashtag-2','hashtag-3'],
+            hashtags:[{
+                id: 'hashtag-1',
+                name: 'HashTag 1'
+            },{
+                id: 'hashtag-2',
+                name: 'HashTag 2'
+            },{
+                id: 'hashtag-3',
+                name: 'HashTag 3'
+            }]
+        }
 }

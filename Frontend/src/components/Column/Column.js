@@ -14,7 +14,7 @@ const Column = (props) => {
             textAreaRef.current.focus();
         }
     },[isShowAddNewTask])
-    const handleAddNewCard = () => {
+    const handleAddNewTask = () => {
         if(!valueTextArea){
             textAreaRef.current.focus();
             return;
@@ -26,6 +26,32 @@ const Column = (props) => {
                 <header className="column-drag-handle">
                         {column.title}
                 </header>
+                {isShowAddNewTask === true &&
+                    <div className='add-new-task'>
+                    <textarea
+                        rows="1"
+                        className='form-control'
+                        placeholder='Enter a title for this task'
+                        ref={textAreaRef}
+                        value={valueTextArea}
+                        onChange={(event) => setValueTextArea(event.target.value)}
+                    ></textarea>
+                        <div className='group-btn'>
+                            <button className='btn btn-success' onClick={()=>handleAddNewTask()}>
+                                Add Task
+                            </button>
+                            <i className='fa fa-times icon' onClick={() =>setIsShowAddNewTask(false)}></i>
+                        </div>
+                    </div>
+                }
+                {isShowAddNewTask === false &&
+                    <footer>
+                        <div className="footer-action" onClick={() =>setIsShowAddNewTask(true)}>
+                            <i className='fa fa-plus icon' >
+                            </i> Add another card
+                        </div>
+                    </footer>
+                }
                 <div className="list-task">
                     <Container
                         {...column.props}
@@ -53,32 +79,6 @@ const Column = (props) => {
                     })}
                     </Container>
                 </div>
-                    {isShowAddNewTask === true &&
-                        <div className='add-new-task'>
-                    <textarea
-                        rows="2"
-                        className='form-control'
-                        placeholder='Enter a title for this task'
-                        ref={textAreaRef}
-                        value={valueTextArea}
-                        onChange={(event) => setValueTextArea(event.target.value)}
-                    ></textarea>
-                            <div className='group-btn'>
-                                <button className='btn btn-success' onClick={()=>handleAddNewCard()}>
-                                    Add Task
-                                </button>
-                                <i className='fa fa-times icon' onClick={() =>setIsShowAddNewTask(false)}></i>
-                            </div>
-                        </div>
-                    }
-                {isShowAddNewTask === false &&
-                    <footer>
-                        <div className="footer-action" onClick={() =>setIsShowAddNewTask(true)}>
-                            <i className='fa fa-plus icon' >
-                            </i> Add another card
-                        </div>
-                    </footer>
-                }
             </div>
         </>
     )
