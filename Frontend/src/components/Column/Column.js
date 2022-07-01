@@ -10,15 +10,30 @@ const Column = (props) => {
     const textAreaRef = useRef(null);
     const [valueTextArea,setValueTextArea] = useState("");
     useEffect(()=>{
-        if(isShowAddNewTask === true && textAreaRef && textAreaRef.current){
+        if(isShowAddNewTask === true){
             textAreaRef.current.focus();
         }
     },[isShowAddNewTask])
-    const handleAddNewTask = () => {
+    function handleAddNewTask () {
         if(!valueTextArea){
             textAreaRef.current.focus();
             return;
         }
+    }
+    const setTaskInColumn = (tasks) => {
+        return (tasks && tasks.length > 0 && tasks.map((task,index)=>{
+            return(
+                <Draggable key = {task.id}>
+                    <Task
+                        task={task}
+                    />
+                </Draggable>
+            )
+        }))
+    }
+    function ShowAddNewTask(e) {
+        if(isShowAddNewTask === true) setIsShowAddNewTask(false);
+        else setIsShowAddNewTask(true);
     }
     return (
         <>
@@ -37,16 +52,16 @@ const Column = (props) => {
                         onChange={(event) => setValueTextArea(event.target.value)}
                     ></textarea>
                         <div className='group-btn'>
-                            <button className='btn btn-success' onClick={()=>handleAddNewTask()}>
+                            <button className='btn btn-success' onClick={handleAddNewTask}>
                                 Add Task
                             </button>
-                            <i className='fa fa-times icon' onClick={() =>setIsShowAddNewTask(false)}></i>
+                            <i className='fa fa-times icon' onClick={ShowAddNewTask}></i>
                         </div>
                     </div>
                 }
                 {isShowAddNewTask === false &&
                     <footer>
-                        <div className="footer-action" onClick={() =>setIsShowAddNewTask(true)}>
+                        <div className="footer-action" onClick={ShowAddNewTask}>
                             <i className='fa fa-plus icon' >
                             </i> Add another card
                         </div>
@@ -68,15 +83,7 @@ const Column = (props) => {
                         }}
                         dropPlaceholderAnimationDuration={200}
                     >
-                    {tasks && tasks.length > 0 && tasks.map((task,index)=>{
-                        return(
-                            <Draggable key = {task.id}>
-                            <Task
-                                task={task}
-                            />
-                            </Draggable>
-                        )
-                    })}
+                        {setTaskInColumn(tasks)}
                     </Container>
                 </div>
             </div>

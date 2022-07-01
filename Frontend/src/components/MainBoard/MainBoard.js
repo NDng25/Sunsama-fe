@@ -5,13 +5,10 @@ import BoardBar from "../BoardBar/BoardBar";
 import FilterColumn from "../FilterColumn/FilterColumn";
 const MainBoard = () => {
     return (
-        <>
-            <div className='main-board'>
-                <FilterColumn/>
-                <BoardContent/>
-            </div>
-
-        </>
+        <div className='main-board'>
+            <FilterColumn/>
+            <BoardContent/>
+        </div>
     )
 }
 export default MainBoard

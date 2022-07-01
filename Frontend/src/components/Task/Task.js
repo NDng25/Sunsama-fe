@@ -10,6 +10,16 @@ const Task = (props)=>{
     const handleTaskChange = (e) => {
        setCheck(e.target.checked);
     };
+    const setSubtaskInTask = (subtasks) => {
+        return (subtasks && subtasks.length > 0 && subtasks.map((subtask  ,index) =>{
+            return (
+                <SubTask
+                    key = {subtask.id}
+                    subtask = {subtask}
+                />
+            )
+        }))
+    }
     return (
         <>
             <div className="task-item">
@@ -20,14 +30,7 @@ const Task = (props)=>{
                     onChange={handleTaskChange}
                 />
                 {task.title}
-                {subtasks && subtasks.length > 0 && subtasks.map((subtask  ,index) =>{
-                    return (
-                            <SubTask
-                                key = {subtask.id}
-                                subtask = {subtask}
-                            />
-                    )
-                })}
+                {setSubtaskInTask(subtasks)}
                 <div className="decription-task">
                     {task.description}
                 </div>
