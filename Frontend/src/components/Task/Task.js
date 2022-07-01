@@ -3,6 +3,7 @@ import './Task.scss';
 import {Draggable} from "react-smooth-dnd";
 import SubTask from "../SubTask/SubTask";
 import Hashtag from "../Hashtag/Hashtag";
+import TaskDetail from "../TaskDetail/TaskDetail";
 const Task = (props)=>{
     const { task } = props;
     const subtasks = task.subtasks;
@@ -20,9 +21,17 @@ const Task = (props)=>{
             )
         }))
     }
+    function OpenDetailOfTask () {
+        return (
+            <TaskDetail
+            task = {task}
+            />
+        )
+
+    }
     return (
         <>
-            <div className="task-item">
+            <div className="task-item" onClick={OpenDetailOfTask}>
                 <input
                     type="checkbox"
                     className="check-task checker"
