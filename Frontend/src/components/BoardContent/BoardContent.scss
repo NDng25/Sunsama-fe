@@ -1,0 +1,6 @@
+@import'../../settings';
+.board-columns {
+  display: flex;
+  overflow-x: auto;
+  //justify-content: space-between;
+}

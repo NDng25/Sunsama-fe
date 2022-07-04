@@ -1,0 +1,20 @@
+@import "../../settings";
+.task-item{
+  background-color: white;
+  padding:$gap;
+  border-radius: $task-border-radius;
+  box-shadow: 0 1px 1px rgba(0,0,0,1);
+  margin-bottom: 10px;
+  font-weight: bold; ;
+  &:not(:last-child){
+    margin-bottom: $gap;
+  }
+  .decription-task{
+    font-size: 12px;
+    font-weight: normal;
+    color: #5b5757;
+  }
+  .checker{
+    font-size: 100px;
+  }
+}

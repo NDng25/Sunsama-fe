@@ -1,0 +1,11 @@
+@import "../../settings";
+.subtask-item{
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #5b5757;
+  margin-top: 2px;
+  &:not(:last-child){
+    margin-bottom: 2px;
+  }
+}
