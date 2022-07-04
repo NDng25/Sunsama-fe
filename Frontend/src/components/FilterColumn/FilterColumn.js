@@ -1,20 +1,37 @@
 import React, {useState,useEffect} from "react";
 import'./FilterColumn.scss';
 import Calendar from 'react-calendar';
-import {initHashtag} from "../../action/intiData";
 import Hashtag from "../Hashtag/Hashtag";
-import {mapOrder} from "../../utilities/sorts";
+import axios from "axios";
+const  BASE_URL= "http://192.168.101.95:4455";
 const FilterColumn = () =>{
     const [value, onChange] = useState(new Date());
-    const [HashtagList,setHashtagList] = useState([]);
     const [Hashtags,setHashtags] = useState([]);
-    useEffect(()=>{
-        const HashtagList = initHashtag.hashtaglists;
-        if(HashtagList){
-            setHashtagList((HashtagList));
-            setHashtags(mapOrder(HashtagList.hashtags,HashtagList.HashtagOrder,'id'));
+    const [ReloadHashtag, isReloadHashtag] = useState(true);
+    useEffect(() => {
+        const fetchHashtags = async () => {
+            console.log("Fetching");
+            try{
+                let res = await axios.get(`${BASE_URL}/hashtags/`);
+                setHashtags(res.data);
+                isReloadHashtag(false);
+            }
+            catch (e){
+                console.log(e);
+            }
         }
-    },[]);
+        fetchHashtags();
+    },[ReloadHashtag]);
+    const onUpdateHashtag = async (hashtag) => {
+        console.log("Uploading");
+            try{
+                await axios.put(`${BASE_URL}/hashtags/`+hashtag.id,hashtag);
+                isReloadHashtag(true);
+            }
+            catch (e){
+                console.log(e);
+            }
+    }
     return (
             <div className="filter-column">
                 <Calendar className="calendar"
@@ -24,10 +41,14 @@ const FilterColumn = () =>{
                 <div className="list-hashtag"> Channels
                     {Hashtags && Hashtags.length > 0 && Hashtags.map((hashtag  ,index) =>{
                         return (
-                            <Hashtag
-                                key = {hashtag.id}
-                                hashtag = {hashtag}
-                            />
+                            <div className="channel-row">
+                                <Hashtag
+                                    key = {hashtag.id}
+                                    hashtag = {hashtag}
+                                    onUpdateHashtag = {onUpdateHashtag}
+
+                                />
+                            </div>
                         )
                     })}
                     <div className="add-new-hashtag">

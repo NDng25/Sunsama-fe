@@ -5,9 +5,14 @@ import './App.scss';
 import reportWebVitals from './reportWebVitals';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import { Route, Routes,BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <Routes>
+              <Route path='/dashboard' element= {<App />}></Route>
+          </Routes>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

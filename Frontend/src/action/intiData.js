@@ -1,8 +1,7 @@
 
 export const initData = {
-    boards:[
+    boards:
         {
-            id:"board-1",
             columnOrder:['column-2','column-1','column-3'],
             columns:
                 [
@@ -246,7 +245,6 @@ export const initData = {
                 }
             ]
         }
-    ]
 }
 export const initHashtag = {
     hashtaglists:

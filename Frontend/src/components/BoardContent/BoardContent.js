@@ -9,7 +9,7 @@ const BoardContent = ()  =>{
     const [board, setBoard] = useState({});
     const [columns, setColumns] = useState([])
     useEffect(()=>{
-        const boardInitData = initData.boards.find(item => item.id === 'board-1');
+        const boardInitData = initData.boards;
         if(boardInitData){
             setBoard((boardInitData));
             setColumns(mapOrder(boardInitData.columns,boardInitData.columnOrder,'id'));

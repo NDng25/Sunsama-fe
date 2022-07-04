@@ -12,7 +12,7 @@ body {
       border-radius: $task-border-radius;
     }
   }
-  .list-hashtag{;
+  .list-hashtag{
     margin-top: 5px;
     height:calc(100% - #{$height-calendar});
     background-color: white;
@@ -20,16 +20,27 @@ body {
     padding: 8px 5px 0 10px;
     overflow-y :auto;
     font-weight: bold;
-    > * {
+    .hashtag-item{
+      display: flex;
+      align-items: flex-end;
       padding: 10px 5px 0 10px;
+      max-width: $width-calendar - 30px;
+      overflow-x :hidden;
+      overflow-y :hidden;
       color: black;
       text-align:left;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: normal;
+      justify-content: space-between;
     }
     .add-new-hashtag{
+      margin-top: 10px;
       color: gray;
       font-weight: bold;
+      &:hover{
+        color:#333;
+        cursor : pointer;
+      }
     }
   }
 }

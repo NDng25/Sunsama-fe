@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from "react";
 import './Column.scss';
 import Task from "../Task/Task";
 import {Container,Draggable} from "react-smooth-dnd";
-import {Dropdown} from "react-bootstrap";
 const Column = (props) => {
     const { column ,onTaskDrop } = props;
     const tasks = column.tasks;

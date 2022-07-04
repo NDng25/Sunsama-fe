@@ -1,5 +1,34 @@
 @import "../../settings";
 .hashtag-item{
-  text-align:right;
-  font-size: 10px;
+  .hashtag{
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    &:hover{
+      color: #252424;
+      cursor : pointer;
+    }
+  }
+  &:focus{
+    outline: none!important;
+    box-shadow: none!important;
+  }
+  .edit-button{
+    width: 30%;
+    color: #646161;
+    text-align:right;
+    .edit-name-button{
+      padding-right: 5px;
+      &:hover{
+        color: #252424;
+        cursor : pointer;
+      }
+    }
+    .delete-button{
+      &:hover{
+        color: #252424;
+        cursor : pointer;
+      }
+    }
+  }
 }
