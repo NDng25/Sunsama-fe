@@ -7,17 +7,15 @@ const SubTask = (props)=>{
         setCheckSubTask(e.target.checked);
     };
     return (
-        <>
-            <div className="subtask-item">
-                <input
-                    type="checkbox"
-                    className="check-subtask checker"
-                    checked={checkSubTask}
-                    onChange={handleSubTaskChange}
-                />
-                {subtask.title}
-            </div>
-        </>
+        <div className="subtask-item">
+            <input
+                type="checkbox"
+                className="check-subtask checker"
+                checked={checkSubTask}
+                onChange={handleSubTaskChange}
+            />
+            {subtask.title}
+        </div>
     )
 }
 export default SubTask

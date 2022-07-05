@@ -3,15 +3,13 @@ import './BoardContent.scss'
 import Column from "../Column/Column";
 import {initData} from "../../action/intiData";
 import { Container, Draggable } from "react-smooth-dnd";
-import {isEmpty} from "lodash";
 import {mapOrder} from "../../utilities/sorts";
 import {applyDrag} from "../../utilities/dragDrop";
 const BoardContent = ()  =>{
     const [board, setBoard] = useState({});
-    const [columns, setColumns] = useState([]);
-
+    const [columns, setColumns] = useState([])
     useEffect(()=>{
-        const boardInitData = initData.boards.find(item => item.id === 'board-1');
+        const boardInitData = initData.boards;
         if(boardInitData){
             setBoard((boardInitData));
             setColumns(mapOrder(boardInitData.columns,boardInitData.columnOrder,'id'));
@@ -28,14 +26,6 @@ const BoardContent = ()  =>{
         setColumns(newColumns);
         setBoard(newBoard);
     }
-    if(_.isEmpty(board)){
-        return (
-            <>
-                <div className='not-found'>Board not found</div>
-            </>
-
-        )
-    }
     const onTaskDrop = (dropResult,columnId) => {
         if(dropResult.removedIndex !== null || dropResult.addedIndex !== null )
         {
@@ -43,11 +33,21 @@ const BoardContent = ()  =>{
             let currentColumn = newColumns.find(column => column.id === columnId);
             currentColumn.tasks = applyDrag(currentColumn.tasks,dropResult);
             currentColumn.taskOrder = currentColumn.tasks.map(task =>task.id);
-            console.log(">>> current column : ",currentColumn);
             setColumns(newColumns)
         }
     }
-
+    const setColumnInBoard = (columns) => {
+        return ( columns && columns.length > 0 && columns.map((column  ,index) =>{
+            return (
+                <Draggable key = {column.id}>
+                    <Column
+                        column = {column}
+                        onTaskDrop = {onTaskDrop}
+                    />
+                </Draggable>
+            )
+        }))
+    }
     return (
         <>
             <div className="board-columns">
@@ -62,16 +62,7 @@ const BoardContent = ()  =>{
                         className: 'cards-drop-preview'
                     }}
                 >
-                {columns && columns.length > 0 && columns.map((column  ,index) =>{
-                    return (
-                        <Draggable key = {column.id}>
-                        <Column
-                            column = {column}
-                            onTaskDrop = {onTaskDrop}
-                        />
-                        </Draggable>
-                    )
-                })}
+                    {setColumnInBoard(columns)}
                 </Container>
             </div>
         </>

@@ -1,8 +1,7 @@
 
 export const initData = {
-    boards:[
+    boards:
         {
-            id:"board-1",
             columnOrder:['column-2','column-1','column-3'],
             columns:
                 [
@@ -246,7 +245,6 @@ export const initData = {
                 }
             ]
         }
-    ]
 }
 export const initHashtag = {
     hashtaglists:
@@ -263,4 +261,22 @@ export const initHashtag = {
                 name: 'HashTag 3'
             }]
         }
+}
+export const initTask = {
+    id:'task-8',
+    title :"Title of task 8",
+    status: 1,
+    description : "Deciption of Task 8",
+    hashtag:[{
+        id:'hashtag-3',
+        name:'HashTag 3',
+    }],
+    subtaskOrder:['task-1'],
+    subtasks:[
+        {
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        }
+    ],
 }

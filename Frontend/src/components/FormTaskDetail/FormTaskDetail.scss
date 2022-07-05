@@ -1,0 +1,65 @@
+@import '../../_settings';
+body {
+  background: rgba(0,0,0,0.6);
+}
+.body-form{
+  text-align: center;
+  background-color: white;
+  width: $width-form-add-hashtag;
+  margin-left: calc(50% - #{$width-form-add-hashtag/2});
+  margin-right: calc(50% - #{$width-form-add-hashtag/2});
+  margin-top: 50px;
+  padding:10px 10px 10px 10px;
+  border-radius: $task-border-radius;
+  box-shadow: 0 1px 1px rgba(0,0,0,1);
+  .input-title{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: space-between;
+  }
+  .input-description{
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+  }
+  .list-hashtag{
+    font-size:16px;
+    font-weight: bold;
+  }
+  .day-task{
+    margin-top: 5px;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .due-day{
+    margin-top: 5px;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .add-new-subtask{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px ;
+    .buttons-subtask{
+      width : 20%;
+      .add-button{
+        margin-right: 10px;
+      }
+    }
+  }
+  .buttons{
+    justify-content:space-between;
+    padding-top: 20px;
+    .edit-button{
+      color: gray;
+    }
+    .cancel-button{
+      .return-dashboard{
+        text-decoration: none;
+      }
+    }
+  }
+}
