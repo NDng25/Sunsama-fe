@@ -62,7 +62,7 @@ const Column = (props) => {
                     <footer>
                         <div className="footer-action" onClick={ShowAddNewTask}>
                             <i className='fa fa-plus icon' >
-                            </i> Add another card
+                            </i> Add another task
                         </div>
                     </footer>
                 }

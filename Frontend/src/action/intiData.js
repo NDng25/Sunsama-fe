@@ -262,3 +262,21 @@ export const initHashtag = {
             }]
         }
 }
+export const initTask = {
+    id:'task-8',
+    title :"Title of task 8",
+    status: 1,
+    description : "Deciption of Task 8",
+    hashtag:[{
+        id:'hashtag-3',
+        name:'HashTag 3',
+    }],
+    subtaskOrder:['task-1'],
+    subtasks:[
+        {
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        }
+    ],
+}

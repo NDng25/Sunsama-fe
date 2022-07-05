@@ -12,15 +12,49 @@ body {
   padding:10px 10px 10px 10px;
   border-radius: $task-border-radius;
   box-shadow: 0 1px 1px rgba(0,0,0,1);
-  .input-name{
+  .input-title{
+    display: flex;
     padding-top: 10px;
     padding-bottom: 10px;
+    justify-content: space-between;
+  }
+  .input-description{
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+  }
+  .list-hashtag{
+    font-size:16px;
+    font-weight: bold;
+  }
+  .day-task{
+    margin-top: 5px;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .due-day{
+    margin-top: 5px;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .add-new-subtask{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px ;
+    .buttons-subtask{
+      width : 20%;
+      .add-button{
+        margin-right: 10px;
+      }
+    }
   }
   .buttons{
-    justifyContent:space-between;
+    justify-content:space-between;
     padding-top: 20px;
-    .create-button{
-      margin-right: 10px;
+    .edit-button{
+      color: gray;
     }
     .cancel-button{
       .return-dashboard{

@@ -34,7 +34,6 @@ const FilterColumn = () =>{
             }
     }
     const onDeleteHashtag = (hashtag) => {
-        console.log(hashtag);
     }
     return (
             <div className="filter-column">
@@ -55,11 +54,8 @@ const FilterColumn = () =>{
                             </div>
                         )
                     })}
-                    {/*<div className="add-new-hashtag" onClick={OpenFormAddHashtag}>*/}
-                    {/*    + Add new hashtag*/}
-                    {/*</div>*/}
                     <div  className="add-new-hashtag">
-                        <Link to="/addhashtag" className="link-form-add-hashtag">
+                        <Link to="/add-hashtag" className="link-form-add-hashtag">
                             + Add new hashtag
                         </Link>
                     </div>

@@ -29,6 +29,11 @@
     }
     .info-task{
       text-align: right;
+      color: gray;
+      &:hover{
+        color:#333;
+        cursor : pointer;
+      }
     }
   }
 }
