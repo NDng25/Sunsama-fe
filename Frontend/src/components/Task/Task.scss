@@ -21,4 +21,14 @@
     text-align:right;
     font-size: 10px;
   }
+  .header-task{
+    display: flex;
+    justify-content: space-between;
+    .title-task{
+      max-width: 200px;
+    }
+    .info-task{
+      text-align: right;
+    }
+  }
 }

@@ -3,7 +3,7 @@ import './Hashtag.scss';
 import {Form} from "react-bootstrap";
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/all";
 const Hashtag = (props) =>{
-    const { hashtag ,onUpdateHashtag} = props;
+    const { hashtag ,onUpdateHashtag,onDeleteHashtag} = props;
     const [NameHashtag, setNameHashtag] = useState("");
     const [disable, setDisable] = useState(true);
     useEffect(()=>{
@@ -27,6 +27,13 @@ const Hashtag = (props) =>{
         }
         setDisable(true);
     }
+    function DeleteHashtag(event) {
+        const detele_hashtag = {
+                id: hashtag.id,
+                name: hashtag.name
+            }
+        onDeleteHashtag(detele_hashtag);
+    }
     return (
         <div className="hashtag-item">
             #<Form.Control
@@ -43,7 +50,10 @@ const Hashtag = (props) =>{
                     className="edit-name-button"
                     onClick={EnableEditHashtag}
                 />
-                <AiOutlineDelete className="delete-button"/>
+                <AiOutlineDelete 
+                    className="delete-button"
+                    onClick={DeleteHashtag}
+                />
             </div>
         </div>
     )

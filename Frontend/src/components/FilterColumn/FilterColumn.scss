@@ -34,9 +34,13 @@ body {
       justify-content: space-between;
     }
     .add-new-hashtag{
-      margin-top: 10px;
+      padding-top: 20px;
       color: gray;
       font-weight: bold;
+      .link-form-add-hashtag{
+        text-decoration: none;
+        color: inherit;
+      }
       &:hover{
         color:#333;
         cursor : pointer;

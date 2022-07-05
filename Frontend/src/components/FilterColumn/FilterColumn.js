@@ -3,13 +3,14 @@ import'./FilterColumn.scss';
 import Calendar from 'react-calendar';
 import Hashtag from "../Hashtag/Hashtag";
 import axios from "axios";
-const  BASE_URL= "http://192.168.101.95:4455";
+import {Link} from "react-router-dom";
+import {BASE_URL} from "../../index";
 const FilterColumn = () =>{
     const [value, onChange] = useState(new Date());
     const [Hashtags,setHashtags] = useState([]);
     const [ReloadHashtag, isReloadHashtag] = useState(true);
     useEffect(() => {
-        const fetchHashtags = async () => {
+        const fetchHashTags = async () => {
             console.log("Fetching");
             try{
                 let res = await axios.get(`${BASE_URL}/hashtags/`);
@@ -20,7 +21,7 @@ const FilterColumn = () =>{
                 console.log(e);
             }
         }
-        fetchHashtags();
+        fetchHashTags();
     },[ReloadHashtag]);
     const onUpdateHashtag = async (hashtag) => {
         console.log("Uploading");
@@ -31,6 +32,9 @@ const FilterColumn = () =>{
             catch (e){
                 console.log(e);
             }
+    }
+    const onDeleteHashtag = (hashtag) => {
+        console.log(hashtag);
     }
     return (
             <div className="filter-column">
@@ -46,13 +50,18 @@ const FilterColumn = () =>{
                                     key = {hashtag.id}
                                     hashtag = {hashtag}
                                     onUpdateHashtag = {onUpdateHashtag}
-
+                                    onDeleteHashtag = {onDeleteHashtag}
                                 />
                             </div>
                         )
                     })}
-                    <div className="add-new-hashtag">
-                        + Add new hashtag
+                    {/*<div className="add-new-hashtag" onClick={OpenFormAddHashtag}>*/}
+                    {/*    + Add new hashtag*/}
+                    {/*</div>*/}
+                    <div  className="add-new-hashtag">
+                        <Link to="/addhashtag" className="link-form-add-hashtag">
+                            + Add new hashtag
+                        </Link>
                     </div>
                 </div>
             </div>
