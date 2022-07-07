@@ -3,11 +3,12 @@ import './Column.scss';
 import Task from "../Task/Task";
 import {Container,Draggable} from "react-smooth-dnd";
 const Column = (props) => {
-    const { column ,onTaskDrop } = props;
-    const tasks = column.tasks;
     const [isShowAddNewTask , setIsShowAddNewTask] = useState(false);
     const textAreaRef = useRef(null);
     const [valueTextArea,setValueTextArea] = useState("");
+
+    const { column ,onTaskDrop } = props;
+    const tasks = column.tasks;
     useEffect(()=>{
         if(isShowAddNewTask === true){
             textAreaRef.current.focus();
@@ -76,9 +77,9 @@ const Column = (props) => {
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"
                         dropPlaceholder={{
-                            animationDuration: 150,
+                            animationDuration: 200,
                             showOnTop: true,
-                            className: 'drop-preview'
+                            className: 'task-drop-preview'
                         }}
                         dropPlaceholderAnimationDuration={200}
                     >

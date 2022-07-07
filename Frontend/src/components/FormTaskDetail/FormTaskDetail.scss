@@ -26,18 +26,37 @@ body {
   .list-hashtag{
     font-size:16px;
     font-weight: bold;
+    text-align: left;
+    max-height: 50%;
+    overflow-y:auto;
+    &::-webkit-scrollbar{
+      width:11px;
+      color: red;
+    }
   }
-  .day-task{
-    margin-top: 5px;
-    margin-bottom:5px;
+  .date-task{
+    margin-top: 10px;
+    margin-bottom:10px;
     display: flex;
     justify-content: space-between;
+    .name-date{
+      width: 120px;
+    }
+    .date{
+      margin-left: 60px;
+    }
   }
-  .due-day{
-    margin-top: 5px;
-    margin-bottom:5px;
+  .due-date{
+    margin-top: 10px;
+    margin: bottom 10px;
     display: flex;
     justify-content: space-between;
+    .name-duedate{
+      width: 100px;
+    }
+    .duedate{
+      margin-left: 70px;
+    }
   }
   .add-new-subtask{
     display: flex;

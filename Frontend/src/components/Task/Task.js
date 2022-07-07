@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import './Task.scss';
 import SubTask from "../SubTask/SubTask";
 import {AiOutlineInfoCircle} from "react-icons/all";
-import ReactDOM from "react-dom";
 import {Link} from "react-router-dom";
 const Task = (props)=>{
     const { task } = props;
     const subtasks = task.subtasks;
+    const hashtags = task.hashtags;
     const [check, setCheck] = useState(task.status);
     const handleTaskChange = (e) => {
         setCheck(e.target.checked);
@@ -22,7 +22,7 @@ const Task = (props)=>{
                         onChange={handleTaskChange}
                     />
                     <div className="title-task">{task.title}</div>
-                    <Link to="/task-detail">
+                    <Link to={`/task-detail/`+task.id}>
                         <AiOutlineInfoCircle className="info-task"/>
                     </Link>
                 </div>
@@ -35,10 +35,16 @@ const Task = (props)=>{
                     )
                 })}
                 <div className="decription-task">
-                    {task.description}
+                    {task.describe}
                 </div>
                 <div className="hashtag-of-task">
-                    #{task.hashtag.name}
+                    {hashtags && hashtags.length > 0 && hashtags.map((hashtag ,index) =>{
+                        return (
+                            <div>
+                                #{hashtag.name}
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </>

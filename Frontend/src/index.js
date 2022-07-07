@@ -15,14 +15,10 @@ ReactDOM.render(
           <Routes>
               <Route path='/dashboard' element= {<App />}></Route>
               <Route path='/add-hashtag' element= {<FormAddHashtag />}></Route>
-              <Route path='/task-detail' element= {<FormTaskDetail />}></Route>
+              <Route path="/task-detail/:idtask" element= {<FormTaskDetail />}></Route>
           </Routes>
       </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

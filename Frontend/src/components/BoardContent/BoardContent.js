@@ -1,20 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import './BoardContent.scss'
 import Column from "../Column/Column";
-import {initData} from "../../action/intiData";
 import { Container, Draggable } from "react-smooth-dnd";
-import {mapOrder} from "../../utilities/sorts";
 import {applyDrag} from "../../utilities/dragDrop";
+import axios from "axios";
+import {BASE_URL} from "../../index";
+import moment from "moment";
 const BoardContent = ()  =>{
     const [board, setBoard] = useState({});
-    const [columns, setColumns] = useState([])
-    useEffect(()=>{
-        const boardInitData = initData.boards;
-        if(boardInitData){
-            setBoard((boardInitData));
-            setColumns(mapOrder(boardInitData.columns,boardInitData.columnOrder,'id'));
+    const [columns, setColumns] = useState([]);;
+    // useEffect(()=>{
+    //     const boardInitData = initData.boards;
+    //     if(boardInitData){
+    //         setBoard((boardInitData));
+    //         setColumns(boardInitData.columns);
+    //     }
+    //     },[]);
+    useEffect(() => {
+        const fetchHashTags = async () => {
+            try{
+                let dataColumn = [];
+                const date = moment();
+                for (let i=0;i<3;i++)
+                {
+                    let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD"));
+                    dataColumn.push({
+                        id:date.format("YYYY-MM-DD"),
+                        title: date.format("YYYY-MM-DD"),
+                        tasks:res.data
+                    });
+                    date.add(1, 'day');
+                }
+                setColumns(dataColumn);
+            }
+            catch (e){
+                alert(e);
+            }
         }
-        },[]);
+        fetchHashTags();
+    },[]);
     const onColumnDrop = (dropResult) =>{
         let newColumns = [...columns];
         newColumns = applyDrag(newColumns,dropResult);

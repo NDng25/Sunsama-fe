@@ -14,11 +14,11 @@ export const initData = {
                             id:'task-1',
                             title :"Title of task 1",
                             status:1,
-                            description : "Deciption of Task 1",
-                            hashtag:{
+                            describe : "Deciption of Task 1",
+                            hashtags:[{
                                 id:'hashtag-1',
                                 name:'HashTag 1',
-                            },
+                            }],
                             subtaskOrder:['task-5','task-6'],
                             subtasks:[
                                 {
@@ -37,11 +37,11 @@ export const initData = {
                             id:'task-2',
                             title :"Title of task 2",
                             status: 1,
-                            description : "Deciption of Task 2",
-                            hashtag:{
+                            describe : "Deciption of Task 2",
+                            hashtags:[{
                                 id:'hashtag-2',
                                 name:'HashTag 2',
-                            },
+                            }],
                             subtaskOrder:['task-7','task-8'],
                             subtasks:[
                                 {
@@ -60,11 +60,11 @@ export const initData = {
                             id:'task-3',
                             title :"Title of task 3",
                             status: 1,
-                            description : "Deciption of Task 3",
-                            hashtag:{
+                            describe : "Deciption of Task 3",
+                            hashtags:[{
                                 id:'hashtag-3',
                                 name:'HashTag 3',
-                            },
+                            }],
                             subtaskOrder:['task-5'],
                             subtasks:[
                                 {
@@ -78,11 +78,11 @@ export const initData = {
                             id:'task-4',
                             title :"Title of task 4",
                             status: 1,
-                            description : "Deciption of Task 4",
-                            hashtag:{
+                            describe : "Deciption of Task 4",
+                            hashtags:[{
                                 id:'hashtag-4',
                                 name:'HashTag 4',
-                            },
+                            }],
                             subtaskOrder:['task-6'],
                             subtasks:[
                                 {
@@ -103,11 +103,11 @@ export const initData = {
                             id:'task-5',
                             title :"Title of task 5",
                             status: 1,
-                            description : "Deciption of Task 5",
-                            hashtag:{
+                            describe : "Deciption of Task 5",
+                            hashtags:[{
                                 id:'hashtag-2',
                                 name:'HashTag 2',
-                            },
+                            }],
                             subtaskOrder:['task-10'],
                             subtasks:[
                                 {
@@ -121,11 +121,11 @@ export const initData = {
                             id:'task-6',
                             title :"Title of task 6",
                             status: 1,
-                            description : "Deciption of Task 6",
-                            hashtag:{
+                            describe : "Deciption of Task 6",
+                            hashtags:[{
                                 id:'hashtag-2',
                                 name:'HashTag 2',
-                            },
+                            }],
                             subtaskOrder:['task-12'],
                             subtasks:[
                                 {
@@ -139,11 +139,11 @@ export const initData = {
                             id:'task-7',
                             title :"Title of task 7",
                             status: 1,
-                            description : "Deciption of Task 7",
-                            hashtag:{
+                            describe : "Deciption of Task 7",
+                            hashtags:[{
                                 id:'hashtag-1',
                                 name:'HashTag 1',
-                            },
+                            }],
                             subtaskOrder:['task-12'],
                             subtasks:[
                                 {
@@ -164,7 +164,7 @@ export const initData = {
                             id:'task-8',
                             title :"Title of task 8",
                             status: 1,
-                            description : "Deciption of Task 8",
+                            describe : "Deciption of Task 8",
                             hashtag:[{
                                 id:'hashtag-3',
                                 name:'HashTag 3',
@@ -182,11 +182,11 @@ export const initData = {
                             id:'task-9',
                             title :"Title of task 9",
                             status: 1,
-                            description : "Deciption of Task 9",
-                            hashtag:{
+                            describe : "Deciption of Task 9",
+                            hashtags:[{
                                 id:'hashtag-1',
                                 name:'HashTag 1',
-                            },
+                            }],
                             subtaskOrder:['task-1'],
                             subtasks:[
                                 {
@@ -200,11 +200,11 @@ export const initData = {
                             id:'task-10',
                             title :"Title of task 10",
                             status: 0,
-                            description : "Deciption of Task 10",
-                            hashtag:{
+                            describe : "Deciption of Task 10",
+                            hashtags:[{
                                 id:'hashtag-2',
                                 name:'HashTag 2',
-                            },
+                            }],
                             subtaskOrder:['task-11'],
                             subtasks:[
                                 {
@@ -218,11 +218,11 @@ export const initData = {
                             id:'task-11',
                             title :"Title of task 11",
                             status: 1,
-                            description : "Deciption of Task 11",
-                            hashtag:{
+                            describe : "Deciption of Task 11",
+                            hashtags:[{
                                 id:'hashtag-1',
                                 name:'HashTag 1',
-                            },
+                            }],
                             subtaskOrder:[],
                             subtasks:[
 
@@ -232,11 +232,11 @@ export const initData = {
                             id:'task-12',
                             title :"Title of task 12",
                             status: 1,
-                            description : "Deciption of Task 12",
-                            hashtag:{
+                            describe : "Deciption of Task 12",
+                            hashtags:[{
                                 id:'hashtag-1',
                                 name:'HashTag 1',
-                            },
+                            }],
                             subtaskOrder:[],
                             subtasks:[
                             ],
@@ -266,7 +266,7 @@ export const initTask = {
     id:'task-8',
     title :"Title of task 8",
     status: 1,
-    description : "Deciption of Task 8",
+    describe : "Deciption of Task 8",
     hashtag:[{
         id:'hashtag-3',
         name:'HashTag 3',
@@ -274,6 +274,22 @@ export const initTask = {
     subtaskOrder:['task-1'],
     subtasks:[
         {
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        },{
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        },{
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        },{
+            id:'task-1',
+            title:"Title of task 1",
+            status:0
+        },{
             id:'task-1',
             title:"Title of task 1",
             status:0

@@ -11,7 +11,6 @@ const FilterColumn = () =>{
     const [ReloadHashtag, isReloadHashtag] = useState(true);
     useEffect(() => {
         const fetchHashTags = async () => {
-            console.log("Fetching");
             try{
                 let res = await axios.get(`${BASE_URL}/hashtags/`);
                 setHashtags(res.data);
@@ -24,7 +23,6 @@ const FilterColumn = () =>{
         fetchHashTags();
     },[ReloadHashtag]);
     const onUpdateHashtag = async (hashtag) => {
-        console.log("Uploading");
             try{
                 await axios.put(`${BASE_URL}/hashtags/`+hashtag.id,hashtag);
                 isReloadHashtag(true);

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import './FormAddHashtag.scss';
 import {Link} from "react-router-dom";
 function AddNewHashtag () {

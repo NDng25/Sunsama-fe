@@ -5,6 +5,7 @@
   height: calc(100% - #{$gap});
   margin-left: 10px;
   margin-top: 10px;
+  min-height: 100vh;
   > * {
     //background-color: $list-bg-color;
     color: #333;
@@ -83,5 +84,10 @@
       padding-left: 5px;
       border-radius: $task-border-radius;
     }
+  }
+  .task-drop-preview{
+    background-color: rgba(150,150,200,0.1);
+    border: 1px dashed #abc;
+    margin: 5px 45px 5px 5px;
   }
 }
