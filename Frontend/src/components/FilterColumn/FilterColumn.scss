@@ -14,11 +14,10 @@ body {
   }
   .list-hashtag{
     margin-top: 5px;
-    height:calc(100% - #{$height-calendar});
+    height:calc(100% - #{$height-calendar} - #{12px});
     background-color: white;
     border-radius: $task-border-radius;
     padding: 8px 5px 0 10px;
-    overflow-y :auto;
     font-weight: bold;
     .hashtag-item{
       display: flex;

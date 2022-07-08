@@ -1,6 +1,7 @@
 @import '../../_settings';
 body {
   background: rgba(0,0,0,0.6);
+  min-height: fit-content;
 }
 .body-form{
   text-align: center;
@@ -25,15 +26,26 @@ body {
   }
   .list-hashtag{
     font-size:16px;
-    font-weight: bold;
     text-align: left;
-    max-height: 50%;
-    overflow-y:auto;
-    &::-webkit-scrollbar{
-      width:11px;
-      color: red;
+    .basic-multi-select{
+      margin-top: 10px ;
+      width: 280px;
+      text-align: right;
     }
   }
+  .board-subtask{
+    font-weight: normal;
+    text-align: left;
+    margin: 10px 10px 0 0;
+    .list-subtask{
+      margin-left: 20px;
+    }
+    .name-subtask{
+      font-weight: normal;
+      font-size: 15px;
+    }
+  }
+
   .date-task{
     margin-top: 10px;
     margin-bottom:10px;
@@ -41,9 +53,13 @@ body {
     justify-content: space-between;
     .name-date{
       width: 120px;
+      text-align: left;
     }
     .date{
       margin-left: 60px;
+    }
+    .add-action{
+      font-weight: normal;
     }
   }
   .due-date{
@@ -53,6 +69,7 @@ body {
     justify-content: space-between;
     .name-duedate{
       width: 100px;
+      text-align: left;
     }
     .duedate{
       margin-left: 70px;
