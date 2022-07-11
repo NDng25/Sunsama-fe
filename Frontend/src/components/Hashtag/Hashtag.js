@@ -1,61 +1,99 @@
-import React, {useEffect, useState} from "react";
-import './Hashtag.scss';
-import {Form} from "react-bootstrap";
-import {AiOutlineDelete, AiOutlineEdit} from "react-icons/all";
-const Hashtag = (props) =>{
-    const { hashtag ,onUpdateHashtag,onDeleteHashtag} = props;
-    const [NameHashtag, setNameHashtag] = useState("");
-    const [disable, setDisable] = useState(true);
-    useEffect(()=>{
-        if(hashtag && hashtag.name){
-            setNameHashtag(hashtag.name);
-        }
-    },[hashtag]);
-    function onChangeNameHashTag(e){
-        setNameHashtag(e.target.value);
-    }
-    const EnableEditHashtag = () => {
-        setDisable(false);
-    }
-    function onUpdateNameHashtag(event){
-        if(event.target.value !== hashtag.name){
-            const new_hashtag = {
-                id: hashtag.id,
-                name: event.target.value
-            }
-            onUpdateHashtag(new_hashtag);
-        }
-        setDisable(true);
-    }
-    function DeleteHashtag(event) {
-        const detele_hashtag = {
-                id: hashtag.id,
-                name: hashtag.name
-            }
-        onDeleteHashtag(detele_hashtag);
-    }
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  useSearchParams,
+} from "react-router-dom";
+import Popup from "reactjs-popup";
+import "./Hashtag.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
+import axios from "axios";
+import { ListGroupItem, Button } from "reactstrap";
+import FormAddHashtag from "../FormAddHashtag/FormAddHashtag";
+import { BASE_URL } from "../../index";
+const Hashtag = (props) => {
+  const [deleteStatus, setDeleteStatus] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const generateColor = () => {
+    return "#" + Math.random().toString(16).substr(-6);
+  };
+  const [listHashtag, setChannel] = useState([]);
+  const getData = () => {
+    fetch(BASE_URL + "/hashtags")
+      .then((res) => res.json())
+      .then((res) => {
+        setChannel(res);
+      })
+      .catch((error) => {
+        alert(error.data);
+      });
+  };
+
+  const deleteHashtag = (e) => {
+    axios.delete(BASE_URL + "/hashtags/" + e).then((response) => {
+      if (response.data != null) {
+        setDeleteStatus(!deleteStatus);
+      }
+    });
+  };
+  const onCreateHashtag = (e) => {
+    axios
+      .post(BASE_URL + "/hashtags/", e)
+      .then((response) => {
+        setDeleteStatus(!deleteStatus);
+      })
+      .catch((error) => {
+        alert(error.data);
+      });
+  };
+  const findByHashtag = (e) => {
+    setSearchParams({ hashtag: e });
+  };
+  useEffect(() => {
+    getData();
+  }, [deleteStatus]);
+  const loadHashtag = listHashtag.map((listHashtag) => {
     return (
-        <div className="hashtag-item">
-            #<Form.Control
-            size={"sm"}
-            type="text"
-            value={NameHashtag}
-            className="hashtag"
-            disabled={disable}
-            onChange={onChangeNameHashTag}
-            onBlur={onUpdateNameHashtag}
-        />
-            <div className="edit-button">
-                <AiOutlineEdit
-                    className="edit-name-button"
-                    onClick={EnableEditHashtag}
-                />
-                <AiOutlineDelete 
-                    className="delete-button"
-                    onClick={DeleteHashtag}
-                />
-            </div>
+      <ListGroupItem
+        onClick={() => findByHashtag(listHashtag.id)}
+        className="d-flex sub-hash-tag"
+        key={listHashtag.id}
+      >
+        <p style={{ color: generateColor() }}># {listHashtag.name}</p>
+        <div className="ml-auto active">
+          <Link to={`/edit/${listHashtag.id}`} size="sm" className="btn  mr-1">
+            <AiFillEdit />
+          </Link>
+          <Button
+            color="white"
+            size="sm"
+            onClick={() => deleteHashtag(listHashtag.id)}
+          >
+            <AiOutlineDelete />
+          </Button>
         </div>
-    )
-}
-export default Hashtag
+      </ListGroupItem>
+    );
+  });
+  return (
+    <div className="hashtags">
+      <div className="hashtags-list">
+        <div className="hashtags-list-item">
+          <ul>{loadHashtag}</ul>
+        </div>
+
+        <Popup
+          trigger={<button> + Manage Channels</button>}
+          position="top left"
+        >
+          <div className="popup">
+            <FormAddHashtag onCreateHashtag={onCreateHashtag} />
+          </div>
+        </Popup>
+      </div>
+    </div>
+  );
+};
+export default Hashtag;
