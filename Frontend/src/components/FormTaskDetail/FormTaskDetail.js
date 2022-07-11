@@ -8,6 +8,7 @@ import {IoIosAddCircleOutline, RiDeleteBack2Line} from "react-icons/all";
 import axios from "axios";
 import {BASE_URL} from "../../index";
 import {Multiselect} from "multiselect-react-dropdown";
+import {FormatDateToAdd} from "../../utilities/formatDate";
 const FormAddTaskDetail = () => {
     const { idtask } = useParams();
     const [task,setTask] = useState({});
@@ -61,15 +62,19 @@ const FormAddTaskDetail = () => {
         });
         return hashtags;
     }
-    function AcceptChangeTask(){
-        const ChangedTask = {
-            title : document.getElementById('name-hashtag').value,
-            describe : document.getElementById('valueDescribeTask').value,
-            date : startDate,
-            dueDate :  startDueDate,
-            hashtags : ChangeOptionToHashTags(optionSelectedHashTags)
+    const AcceptChangeTask = async () =>{
+        const edit_task = {
+            "title": document.getElementById('name-hashtag').value,
+            "describe": document.getElementById('valueDescribeTask').value,
+            "date": FormatDateToAdd(startDate)+" 00:00:00",
+            "dueDate": FormatDateToAdd(startDueDate)+" 00:00:00",
+            "hashtagsId": ChangeOptionToHashTags(optionSelectedHashTags),
+            "isStatus": task.status,
+            "parentId": task.parentId,
+            "userId": task.userId
         }
-        // window.location.replace('/dashboard');
+        await axios.put(`${BASE_URL}/tasks/` + idtask + '/',edit_task);
+        window.location.replace('/dashboard');
     }
     function ChangeSelectedHashTags(data){
         setOptionSelectedHashTags(data)

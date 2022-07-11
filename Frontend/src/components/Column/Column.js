@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import './Column.scss';
 import Task from "../Task/Task";
 import {Container,Draggable} from "react-smooth-dnd";
+import {FormatDateToAdd} from "../../utilities/formatDate";
 const Column = (props) => {
     const [isShowAddNewTask , setIsShowAddNewTask] = useState(false);
     const textAreaRef = useRef(null);
@@ -14,14 +15,6 @@ const Column = (props) => {
             textAreaRef.current.focus();
         }
     },[isShowAddNewTask])
-    function FormatDateToAdd(dateTask) {
-        let date = dateTask.getDate();
-        let month = dateTask.getMonth()+1;
-        let year = dateTask.getFullYear();
-        if(date<10) date = '0'+date;
-        if(month<10) month = '0'+month;
-        return date+'-'+month+'-'+year;
-    }
     function handleAddNewTask () {
         if(valueTextArea != null){
             const dateTask = new Date(column.id);
