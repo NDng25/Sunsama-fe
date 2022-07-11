@@ -28,11 +28,7 @@ const SubTask = (props) =>{
         setDisable(true);
     }
     function DeleteSubTask(event) {
-        const detele_subtask = {
-            id: subtask.id,
-            name: subtask.name
-        }
-        // onDeleteSubTask(detele_subtask);
+        onDeleteSubTask(subtask.id);
     }
     return (
         <div className="subtask-item">
