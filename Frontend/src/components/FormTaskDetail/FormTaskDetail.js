@@ -44,6 +44,12 @@ const FormAddTaskDetail = () => {
     function AcceptChangeTask(){
         window.location.replace('/dashboard');
     }
+    const DeleteTask = async () => {
+        if(window.confirm("Do you want to delete this task ?") == true){
+            await axios.delete(`${BASE_URL}/tasks/` + idtask + '/');
+            window.location.replace('/dashboard');
+        }
+    }
     return (
         <div className="body-form">
             <h2 className="Topic-form"> Task Detail</h2>
@@ -116,6 +122,7 @@ const FormAddTaskDetail = () => {
                 <button className="cancel-button">
                     <Link to="/dashboard" className="return-dashboard">Cancel</Link>
                 </button>
+                <button className="delete-button" onClick={DeleteTask}> Delete </button>
             </div>
         </div>
     )

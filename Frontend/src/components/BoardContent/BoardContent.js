@@ -60,6 +60,7 @@ const BoardContent = ()  =>{
             setColumns(newColumns)
         }
     }
+
     const setColumnInBoard = (columns) => {
         return ( columns && columns.length > 0 && columns.map((column  ,index) =>{
             return (
