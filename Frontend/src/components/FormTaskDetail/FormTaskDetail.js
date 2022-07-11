@@ -93,6 +93,14 @@ const FormAddTaskDetail = () => {
             alert(e);
         }
     }
+    const onDeleteSubTask = async (id_delete_sub_task) => {
+        try{
+            await axios.delete(`${BASE_URL}/tasks/`+id_delete_sub_task);
+            setReLoadSubTasks(true);
+        }catch (e) {
+            alert(e);
+        }
+    }
     return (
         <div className="body-form" >
             <h2 className="Topic-form"> Task Detail</h2>
@@ -135,6 +143,7 @@ const FormAddTaskDetail = () => {
                             <SubTask
                                 key = {subtask.id}
                                 subtask = {subtask}
+                                onDeleteSubTask = {onDeleteSubTask}
                             />
                         )
                     })}
