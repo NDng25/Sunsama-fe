@@ -40,7 +40,6 @@ const BoardContent = ()  =>{
         fetchHashTags();
     },[ReLoadBoardContent]);
     const AddNewTask = async (newTask) => {
-        console.log(newTask);
         try{
             await axios.post(`${BASE_URL}/tasks/`,newTask,{headers:axiosHeaders});
             setReLoadBoardContent(true);
