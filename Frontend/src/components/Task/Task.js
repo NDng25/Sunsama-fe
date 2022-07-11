@@ -16,7 +16,6 @@ const Task = (props)=>{
         const fetchHashTags = async () => {
             try{
                 let res = await axios.get(`${BASE_URL}/tasks/`+task.id+'/subtasks');
-                console.log(res.data);
                 setSubTasks(res.data);
             }
             catch (e){

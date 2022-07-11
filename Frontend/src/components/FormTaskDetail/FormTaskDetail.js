@@ -7,20 +7,21 @@ import "react-datepicker/dist/react-datepicker.css";
 import {IoIosAddCircleOutline, RiDeleteBack2Line} from "react-icons/all";
 import axios from "axios";
 import {BASE_URL} from "../../index";
-import Select from 'react-select';
+import {Multiselect} from "multiselect-react-dropdown";
 const FormAddTaskDetail = () => {
     const { idtask } = useParams();
     const [task,setTask] = useState({});
     const [hashtags, setHashTags] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const [startDueDate, setStartDueDate] = useState(new Date());
-    const [isShowAddNewSubTask , setIsShowAddNewSubTask] = useState(false);
     const [subtasks, setSubTasks] = useState([]);
     const [optionHashTags , setOptionHashTags] = useState([]);
+    const [optionSelectedHashTags , setOptionSelectedHashTags] = useState([]);
     useEffect( () => {
         const fetchTasks = async () => {
             try {
                 let options = [];
+                let defaultOptions = [];
                 let dataTask = await axios.get(`${BASE_URL}/tasks/` + idtask + '/');
                 let dataSubTask = await axios.get(`${BASE_URL}/tasks/` + idtask + '/subtasks');
                 let dataHashTags = await axios.get(`${BASE_URL}/hashtags/`);
@@ -29,13 +30,19 @@ const FormAddTaskDetail = () => {
                 setSubTasks(dataSubTask.data);
                 setStartDate(new Date(dataTask.data.date.slice(0, 10)));
                 setStartDueDate(new Date(dataTask.data.date.slice(0, 10)));
-                dataHashTags.data.forEach((hashtag)=>{
-                    options.push({
-                        value: hashtag.id,
-                        label: hashtag.name
+                dataTask.data.hashtags.map((hashtag)=>{
+                    defaultOptions.push({
+                        cat: hashtag.id,
+                        key: hashtag.name
                     });
                 });
-                console.log(options);
+                setOptionSelectedHashTags(defaultOptions);
+                dataHashTags.data.forEach((hashtag)=>{
+                    options.push({
+                        cat: hashtag.id,
+                        key: hashtag.name
+                    });
+                });
                 setOptionHashTags(options);
             } catch (e) {
                 console.log(e);
@@ -43,20 +50,25 @@ const FormAddTaskDetail = () => {
         }
             fetchTasks();
     },[]);
-    function LoadComboboxHashtag () {
-        const dataComboBox = [];
-        hashtags.map((hashtag) => {
-            dataComboBox.push(hashtag.name);
-            return 0;
+    function ChangeOptionToHashTags(options){
+        let hashtags = [];
+        options.map((option) =>{
+            hashtags.push(option.cat);
         });
-    }
-
-    function ShowAddNewSubTask(e) {
-        if(isShowAddNewSubTask === true) setIsShowAddNewSubTask(false);
-        else setIsShowAddNewSubTask(true);
+        return hashtags;
     }
     function AcceptChangeTask(){
-        window.location.replace('/dashboard');
+        const ChangedTask = {
+            title : document.getElementById('name-hashtag').value,
+            describe : document.getElementById('valueDescribeTask').value,
+            date : startDate,
+            dueDate :  startDueDate,
+            hashtags : ChangeOptionToHashTags(optionSelectedHashTags)
+        }
+        // window.location.replace('/dashboard');
+    }
+    function ChangeSelectedHashTags(data){
+        setOptionSelectedHashTags(data)
     }
     const DeleteTask = async () => {
         if(window.confirm("Do you want to delete this task ?") == true){
@@ -69,16 +81,17 @@ const FormAddTaskDetail = () => {
             <h2 className="Topic-form"> Task Detail</h2>
             <div  className="input-title">
                 <div>Title :</div>
-                <input 
-                    type="text" 
-                    name="name" 
+                <input
+                    type="text"
+                    name="name"
                     id="name-hashtag"
                     defaultValue = {task.title}/>
             </div>
             <div className="input-description">
                 <label className="name-description">Description : </label>
-                <textarea 
-                    name="textValue" 
+                <textarea
+                    name="textValue"
+                    id="valueDescribeTask"
                     className="description-task"
                     defaultValue = {task.describe}/>
             </div>
@@ -113,25 +126,24 @@ const FormAddTaskDetail = () => {
                             Title : <input type="text" name="name" id="name-subtask"/>
                         </div>
                         <div className="buttons-subtask">
-                            <IoIosAddCircleOutline className="add-button" onClick={ShowAddNewSubTask}/>
-                            <RiDeleteBack2Line className="cancel-button"onClick={ShowAddNewSubTask}/>
+                            <IoIosAddCircleOutline className="add-button"/>
+                            <RiDeleteBack2Line className="cancel-button"/>
                         </div>
                     </div>
                 </div>
             <div className="list-hashtag">
                 <div>Hashtag : </div>
-                <Select
-                    defaultValue= {[]}
-                    isMulti
-                    name="colors"
+                <Multiselect
+                    displayValue="key"
                     options={optionHashTags}
-                    className="basic-multi-select"
-                    classNamePrefix="select"
+                    selectedValues={optionSelectedHashTags}
+                    onSelect={ChangeSelectedHashTags}
+                    onRemove={ChangeSelectedHashTags}
                 />
             </div>
             </div>
             <div className="buttons" >
-                <button className="edit-button" onClick={AcceptChangeTask}> Edit </button>
+                <button className="save-button" onClick={AcceptChangeTask}> Save </button>
                 <button className="cancel-button">
                     <Link to="/dashboard" className="return-dashboard">Cancel</Link>
                 </button>

@@ -6,23 +6,6 @@ export const applyDrag = (arr, dragResult) => {
     const { removedIndex, addedIndex, payload } = dragResult;
     if (Boolean(removedIndex) && Boolean(addedIndex)) return arr;
     const result = [...arr];
-    console.log(result);
-
-    // useEffect(() => {
-    //     const fetchHashTags = async () => {
-    //         try{
-    //             for (let i=0;i<3;i++)
-    //             {
-    //                 let res = await axios.put(`${BASE_URL}/tasks/`);
-    //                 console.log(res.data);
-    //             }
-    //         }
-    //         catch (e){
-    //             alert(e);
-    //         }
-    //     }ii
-    //     fetchHashTags();
-    // },[]);
 
     let itemToAdd = payload;
 

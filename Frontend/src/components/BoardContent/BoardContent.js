@@ -6,16 +6,15 @@ import {applyDrag} from "../../utilities/dragDrop";
 import axios from "axios";
 import {BASE_URL} from "../../index";
 import moment from "moment";
+import FormTaskDetail from "../FormTaskDetail/FormTaskDetail";
+const axiosHeaders =  {
+    'Content-Type': 'application/json',
+    'Accept':'*/*'
+    }
 const BoardContent = ()  =>{
     const [board, setBoard] = useState({});
-    const [columns, setColumns] = useState([]);;
-    // useEffect(()=>{
-    //     const boardInitData = initData.boards;
-    //     if(boardInitData){
-    //         setBoard((boardInitData));
-    //         setColumns(boardInitData.columns);
-    //     }
-    //     },[]);
+    const [columns, setColumns] = useState([]);
+    const [ReLoadBoardContent, setReLoadBoardContent] = useState(false);
     useEffect(() => {
         const fetchHashTags = async () => {
             try{
@@ -36,9 +35,29 @@ const BoardContent = ()  =>{
             catch (e){
                 alert(e);
             }
+            setReLoadBoardContent(false);
         }
         fetchHashTags();
-    },[]);
+    },[ReLoadBoardContent]);
+    const AddNewTask = async (newTask) => {
+        const input = {
+            "title": "Học tiếng Trung ",
+            "describe": "",
+            "date": "12-07-2022 00:00:00",
+            "dueDate": "12-07-2022 00:00:00",
+            "hashtagsId": [],
+            "isStatus": false,
+            "parentId": 0,
+            "userId": 1
+        }
+        try{
+            await axios.post(`${BASE_URL}/tasks/`,{input},{headers:axiosHeaders});
+            setReLoadBoardContent(true);
+        }
+        catch (e){
+            console.log(e);
+        }
+    }
     const onColumnDrop = (dropResult) =>{
         let newColumns = [...columns];
         newColumns = applyDrag(newColumns,dropResult);
@@ -68,6 +87,7 @@ const BoardContent = ()  =>{
                     <Column
                         column = {column}
                         onTaskDrop = {onTaskDrop}
+                        AddNewTask = {AddNewTask}
                     />
                 </Draggable>
             )

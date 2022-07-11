@@ -3,8 +3,9 @@ import'./FilterColumn.scss';
 import Calendar from 'react-calendar';
 import Hashtag from "../Hashtag/Hashtag";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useParams, useSearchParams} from "react-router-dom";
 import {BASE_URL} from "../../index";
+
 const FilterColumn = () =>{
     const [value, onChange] = useState(new Date());
     const [Hashtags,setHashtags] = useState([]);
