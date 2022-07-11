@@ -19,11 +19,7 @@ const SubTask = (props) =>{
     }
     function onUpdateTitleSubTask(event){
         if(event.target.value !== subtask.name){
-            const new_subtask = {
-                id: subtask.id,
-                title: event.target.value
-            }
-            // onUpdateSubTask(new_subtask);
+            onUpdateSubTask(subtask.id,event.target.value);
         }
         setDisable(true);
     }

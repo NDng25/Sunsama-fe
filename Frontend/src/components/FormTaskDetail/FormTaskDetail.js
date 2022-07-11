@@ -101,6 +101,18 @@ const FormAddTaskDetail = () => {
             alert(e);
         }
     }
+    const onUpdateSubTask = async (id_edit_subtask,title_edit_subtask) => {
+        const editSubTask = {
+            "title": title_edit_subtask,
+            "describe": ''
+        }
+        try{
+            await axios.put(`${BASE_URL}/tasks/`+id_edit_subtask,editSubTask);
+            setReLoadSubTasks(true);
+        }catch (e) {
+            alert(e);
+        }
+    }
     return (
         <div className="body-form" >
             <h2 className="Topic-form"> Task Detail</h2>
@@ -144,6 +156,7 @@ const FormAddTaskDetail = () => {
                                 key = {subtask.id}
                                 subtask = {subtask}
                                 onDeleteSubTask = {onDeleteSubTask}
+                                onUpdateSubTask = {onUpdateSubTask}
                             />
                         )
                     })}
