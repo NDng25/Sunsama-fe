@@ -40,18 +40,8 @@ const BoardContent = ()  =>{
         fetchHashTags();
     },[ReLoadBoardContent]);
     const AddNewTask = async (newTask) => {
-        const input = {
-            "title": "Học tiếng Trung ",
-            "describe": "",
-            "date": "12-07-2022 00:00:00",
-            "dueDate": "12-07-2022 00:00:00",
-            "hashtagsId": [],
-            "isStatus": false,
-            "parentId": 0,
-            "userId": 1
-        }
         try{
-            await axios.post(`${BASE_URL}/tasks/`,{input},{headers:axiosHeaders});
+            await axios.post(`${BASE_URL}/tasks/`,newTask,{headers:axiosHeaders});
             setReLoadBoardContent(true);
         }
         catch (e){
