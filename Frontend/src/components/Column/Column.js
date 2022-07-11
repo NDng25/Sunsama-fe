@@ -36,6 +36,8 @@ const Column = (props) => {
                 "userId": 1
             };
             AddNewTask(newTask);
+            setValueTextArea('');
+            setIsShowAddNewTask(false);
         }
     }
     const setTaskInColumn = (tasks) => {
