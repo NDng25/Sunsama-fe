@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import { Route, Routes,BrowserRouter } from 'react-router-dom';
 import FormAddHashtag from "./components/FormAddHashtag/FormAddHashtag";
 import FormTaskDetail from "./components/FormTaskDetail/FormTaskDetail";
-export const  BASE_URL= "http://192.168.101.105:4455";
+export const  BASE_URL= "https://sunsama.herokuapp.com";
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>

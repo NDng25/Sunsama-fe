@@ -1,8 +1,12 @@
+import React, { useEffect } from 'react';
+import axios from "axios";
+import {BASE_URL} from "../index";
+
 export const applyDrag = (arr, dragResult) => {
     const { removedIndex, addedIndex, payload } = dragResult;
     if (Boolean(removedIndex) && Boolean(addedIndex)) return arr;
-
     const result = [...arr];
+
     let itemToAdd = payload;
 
     if (removedIndex !== null) {
@@ -12,7 +16,6 @@ export const applyDrag = (arr, dragResult) => {
     if (addedIndex !== null) {
         result.splice(addedIndex, 0, itemToAdd);
     }
-
     return result;
 };
 

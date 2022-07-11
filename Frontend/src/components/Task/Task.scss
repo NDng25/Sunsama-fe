@@ -26,6 +26,10 @@
     justify-content: space-between;
     .title-task{
       max-width: 200px;
+      &:hover{
+        cursor : pointer;
+        font-style : italic;
+      }
     }
     .info-task{
       text-align: right;

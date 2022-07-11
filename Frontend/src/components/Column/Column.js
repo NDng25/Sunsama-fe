@@ -7,17 +7,35 @@ const Column = (props) => {
     const textAreaRef = useRef(null);
     const [valueTextArea,setValueTextArea] = useState("");
 
-    const { column ,onTaskDrop } = props;
+    const { column ,onTaskDrop ,AddNewTask} = props;
     const tasks = column.tasks;
     useEffect(()=>{
         if(isShowAddNewTask === true){
             textAreaRef.current.focus();
         }
     },[isShowAddNewTask])
+    function FormatDateToAdd(dateTask) {
+        let date = dateTask.getDate();
+        let month = dateTask.getMonth();;
+        let year = dateTask.getFullYear();
+        if(date<10) date = '0'+date;
+        if(month<10) month = '0'+month;
+        return date+'-'+month+'-'+year;
+    }
     function handleAddNewTask () {
-        if(!valueTextArea){
-            textAreaRef.current.focus();
-            return;
+        if(valueTextArea != null){
+            const dateTask = new Date(column.id);
+            const newTask = {
+                "title": valueTextArea,
+                "describe": "",
+                "date": FormatDateToAdd(dateTask)+" 00:00:00",
+                "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
+                "hashtagsId": [],
+                "isStatus": false,
+                "parentId": 0,
+                "userId": 1
+            };
+            AddNewTask(newTask);
         }
     }
     const setTaskInColumn = (tasks) => {
