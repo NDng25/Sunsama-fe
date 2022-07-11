@@ -17,17 +17,16 @@ const FormAddTaskDetail = () => {
     const [subtasks, setSubTasks] = useState([]);
     const [optionHashTags , setOptionHashTags] = useState([]);
     const [optionSelectedHashTags , setOptionSelectedHashTags] = useState([]);
+    const [isReLoadListSubTasks,setReLoadSubTasks] = useState(false);
     useEffect( () => {
         const fetchTasks = async () => {
             try {
                 let options = [];
                 let defaultOptions = [];
                 let dataTask = await axios.get(`${BASE_URL}/tasks/` + idtask + '/');
-                let dataSubTask = await axios.get(`${BASE_URL}/tasks/` + idtask + '/subtasks');
                 let dataHashTags = await axios.get(`${BASE_URL}/hashtags/`);
                 setTask(dataTask.data);
                 setHashTags(dataHashTags.data);
-                setSubTasks(dataSubTask.data);
                 setStartDate(new Date(dataTask.data.date.slice(0, 10)));
                 setStartDueDate(new Date(dataTask.data.date.slice(0, 10)));
                 dataTask.data.hashtags.map((hashtag)=>{
@@ -50,6 +49,11 @@ const FormAddTaskDetail = () => {
         }
             fetchTasks();
     },[]);
+    useEffect(async ()=>{
+        let dataSubTask = await axios.get(`${BASE_URL}/tasks/` + idtask + '/subtasks');
+        setSubTasks(dataSubTask.data);
+        setReLoadSubTasks(false);
+    },[isReLoadListSubTasks])
     function ChangeOptionToHashTags(options){
         let hashtags = [];
         options.map((option) =>{
@@ -74,6 +78,19 @@ const FormAddTaskDetail = () => {
         if(window.confirm("Do you want to delete this task ?") == true){
             await axios.delete(`${BASE_URL}/tasks/` + idtask + '/');
             window.location.replace('/dashboard');
+        }
+    }
+    const AddNewSubTaskInTask = async () => {
+        const newSubTask = {
+            "title": document.getElementById('title-subtask').value,
+            "describe":''
+        }
+        try{
+            await axios.post(`${BASE_URL}/tasks/` + idtask + '/subtasks',newSubTask);
+            setReLoadSubTasks(true);
+            document.getElementById('title-subtask').value = null;
+        }catch (e) {
+            alert(e);
         }
     }
     return (
@@ -123,12 +140,9 @@ const FormAddTaskDetail = () => {
                     })}
                     <div className='add-new-subtask'>
                         <div  className="name-subtask">
-                            Title : <input type="text" name="name" id="name-subtask"/>
+                            Title : <input type="text" name="title" id="title-subtask"/>
                         </div>
-                        <div className="buttons-subtask">
-                            <IoIosAddCircleOutline className="add-button"/>
-                            <RiDeleteBack2Line className="cancel-button"/>
-                        </div>
+                        <button className="add-button" onClick={AddNewSubTaskInTask}> Add </button>
                     </div>
                 </div>
             <div className="list-hashtag">
