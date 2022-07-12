@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
 import './SubTask.scss';
 const SubTask = (props)=>{
-    const { subtask , onCheckSubTask , isTaskCompleted ,unCheckTask} = props;
+    const { subtask , onCheckSubTask , isTaskCompleted } = props;
     const [checkSubTask, setCheckSubTask] = useState(subtask.status);
     useEffect(()=>{
         if(isTaskCompleted == true) setCheckSubTask(true);
     },[isTaskCompleted]);
     const handleSubTaskChange = (e) => {
-        onCheckSubTask(subtask.id);
+        onCheckSubTask(subtask.id,e.target.checked);
         setCheckSubTask(e.target.checked);
-        if(e.target.checked == false) unCheckTask();
     };
     return (
         <div className="subtask-item">

@@ -31,9 +31,10 @@ const Task = (props)=>{
         await axios.post(`${BASE_URL}/tasks/`+task.id+'/complete');
         if(e.target.checked == true) setReLoadSubTask(true);
     };
-    const onCheckSubTask = async (id_subtask) => {
+    const onCheckSubTask = async (id_subtask,status_subtask) => {
         try {
             await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
+            if(status_subtask == false) setCheck(false);
         }
         catch (e) {
             alert(e);
@@ -41,9 +42,6 @@ const Task = (props)=>{
     }
     function OpenFormTaskDetail() {
         window.location.replace(`/task-detail/`+task.id);
-    }
-    function unCheckTask() {
-        setCheck(false);
     }
     return (
             <div className="task-item">
@@ -66,7 +64,6 @@ const Task = (props)=>{
                             subtask = {subtask}
                             onCheckSubTask = {onCheckSubTask}
                             isTaskCompleted = {check}
-                            unCheckTask = {unCheckTask}
                         />
                     )
                 })}
