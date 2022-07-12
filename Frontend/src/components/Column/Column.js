@@ -54,6 +54,7 @@ const Column = (props) => {
                 <header className="column-drag-handle">
                         {column.title}
                 </header>
+                <div className="date_column">  {column.describe}  </div>
                 {isShowAddNewTask === true &&
                     <div className='add-new-task'>
                     <textarea

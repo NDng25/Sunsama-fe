@@ -26,7 +26,8 @@ const BoardContent = ()  =>{
                     let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD"));
                     dataColumn.push({
                         id:date.format("YYYY-MM-DD"),
-                        title: date.format("YYYY-MM-DD"),
+                        title: date.format("dddd"),
+                        describe: date.format("MMMM Do"),
                         tasks:res.data
                     });
                     date.add(1, 'day');
