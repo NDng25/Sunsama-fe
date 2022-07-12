@@ -31,8 +31,9 @@ const Task = (props)=>{
         await axios.post(`${BASE_URL}/tasks/`+task.id+'/complete');
         if(e.target.checked == true) setReLoadSubTask(true);
     };
-    const onCheckSubTask = async (id_subtask) => {
+    const onCheckSubTask = async (id_subtask,status_subtask) => {
         try {
+            if(status_subtask == false) setCheck(false);
             await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
         }
         catch (e) {
