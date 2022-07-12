@@ -12,21 +12,33 @@ const Task = (props)=>{
     const hashtags = task.hashtags;
     const [check, setCheck] = useState(task.status);
     const [subtasks,setSubTasks] = useState([]);
+    const [isReLoadSubTask , setReLoadSubTask] = useState(false);
     useEffect(() => {
-        const fetchHashTags = async () => {
+        const fetchSubTasks= async () => {
             try{
                 let res = await axios.get(`${BASE_URL}/tasks/`+task.id+'/subtasks');
                 setSubTasks(res.data);
+                setReLoadSubTask(false);
             }
             catch (e){
                 console.log(e);
             }
         }
-        fetchHashTags();
-    },[]);
-    const handleTaskChange = (e) => {
+        fetchSubTasks();
+    },[isReLoadSubTask]);
+    const handleTaskChange = async (e) => {
         setCheck(e.target.checked);
+        await axios.post(`${BASE_URL}/tasks/`+task.id+'/complete');
+        setReLoadSubTask(true);
     };
+    const onCheckSubTask = async (id_subtask) => {
+        try {
+            await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
+        }
+        catch (e) {
+            alert(e);
+        }
+    }
     function OpenFormTaskDetail() {
         window.location.replace(`/task-detail/`+task.id);
     }
@@ -49,6 +61,8 @@ const Task = (props)=>{
                         <SubTask
                             key = {subtask.id}
                             subtask = {subtask}
+                            onCheckSubTask = {onCheckSubTask}
+                            isTaskCompleted = {check}
                         />
                     )
                 })}
