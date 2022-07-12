@@ -13,24 +13,40 @@ import axios from "axios";
 import { ListGroupItem, Button } from "reactstrap";
 import FormAddHashtag from "../FormAddHashtag/FormAddHashtag";
 import { BASE_URL } from "../../index";
+import FormEditHashtag from "../FormEditHashtag/FormEditHashtag";
+
 const Hashtag = (props) => {
   const [deleteStatus, setDeleteStatus] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParam, setSearchParams] = useSearchParams();
   const generateColor = () => {
     return "#" + Math.random().toString(16).substr(-6);
   };
+  // useEffect(()=>{console.log("change",searchParam)},[searchParam])
   const [listHashtag, setChannel] = useState([]);
   const getData = () => {
     fetch(BASE_URL + "/hashtags")
       .then((res) => res.json())
       .then((res) => {
-        setChannel(res);
+        const allHashtag = { id: 0, name: "All" };
+        setChannel([
+          allHashtag,
+          ...res.sort((a, b) => (a.name > b.name ? 1 : -1)),
+        ]);
       })
       .catch((error) => {
         alert(error.data);
       });
   };
-
+  const onEditHashtag = (e) => {
+    axios
+      .put(`${BASE_URL}/hashtags/${e.id}`, e)
+      .then((response) => {
+        setDeleteStatus(!deleteStatus);
+      })
+      .catch((error) => {
+        alert(error.data);
+      });
+  };
   const deleteHashtag = (e) => {
     axios.delete(BASE_URL + "/hashtags/" + e).then((response) => {
       if (response.data != null) {
@@ -61,19 +77,35 @@ const Hashtag = (props) => {
         className="d-flex sub-hash-tag"
         key={listHashtag.id}
       >
-        <p style={{ color: generateColor() }}># {listHashtag.name}</p>
-        <div className="ml-auto active">
-          <Link to={`/edit/${listHashtag.id}`} size="sm" className="btn  mr-1">
-            <AiFillEdit />
-          </Link>
-          <Button
-            color="white"
-            size="sm"
-            onClick={() => deleteHashtag(listHashtag.id)}
-          >
-            <AiOutlineDelete />
-          </Button>
-        </div>
+        <p style={{ color: generateColor() }}># </p>
+        <p>{listHashtag.name}</p>
+        {listHashtag.id ? (
+          <div className="ml-auto active">
+            <Popup
+              trigger={
+                <button className="popup_btn">
+                  <AiFillEdit />
+                </button>
+              }
+              position="top left"
+            >
+              <div className="popup">
+                <FormEditHashtag
+                  onEditHashtag={onEditHashtag}
+                  modalVisible={true}
+                  id={listHashtag.id}
+                />
+              </div>
+            </Popup>
+            <Button
+              color="white"
+              size="sm"
+              onClick={() => deleteHashtag(listHashtag.id)}
+            >
+              <AiOutlineDelete />
+            </Button>
+          </div>
+        ) : null}
       </ListGroupItem>
     );
   });
@@ -89,7 +121,10 @@ const Hashtag = (props) => {
           position="top left"
         >
           <div className="popup">
-            <FormAddHashtag onCreateHashtag={onCreateHashtag} />
+            <FormAddHashtag
+              onCreateHashtag={onCreateHashtag}
+              modalVisible={true}
+            />
           </div>
         </Popup>
       </div>

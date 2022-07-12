@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Link,
+    useSearchParams,
+  } from "react-router-dom";
 import './BoardContent.scss'
 import Column from "../Column/Column";
 import { Container, Draggable } from "react-smooth-dnd";
@@ -14,7 +19,9 @@ const axiosHeaders =  {
 const BoardContent = ()  =>{
     const [board, setBoard] = useState({});
     const [columns, setColumns] = useState([]);
+    const [searchParam, setSearchParams] = useSearchParams();
     const [ReLoadBoardContent, setReLoadBoardContent] = useState(false);
+    useEffect(()=>{console.log("change",searchParam)},[searchParam])
     useEffect(() => {
         const fetchHashTags = async () => {
             try{
