@@ -86,16 +86,18 @@ const FormAddTaskDetail = () => {
         }
     }
     const AddNewSubTaskInTask = async () => {
-        const newSubTask = {
-            "title": document.getElementById('title-subtask').value,
-            "describe":''
-        }
-        try{
-            await axios.post(`${BASE_URL}/tasks/` + idtask + '/subtasks',newSubTask);
-            setReLoadSubTasks(true);
-            document.getElementById('title-subtask').value = null;
-        }catch (e) {
-            alert(e);
+        if(document.getElementById('title-subtask').value != ''){
+            const newSubTask = {
+                "title": document.getElementById('title-subtask').value,
+                "describe":''
+            }
+            try{
+                await axios.post(`${BASE_URL}/tasks/` + idtask + '/subtasks',newSubTask);
+                setReLoadSubTasks(true);
+                document.getElementById('title-subtask').value = null;
+            }catch (e) {
+                alert(e);
+            }
         }
     }
     const onDeleteSubTask = async (id_delete_sub_task) => {

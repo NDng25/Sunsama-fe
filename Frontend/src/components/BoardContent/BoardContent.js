@@ -50,17 +50,6 @@ const BoardContent = ()  =>{
             console.log(e);
         }
     }
-    const onColumnDrop = (dropResult) =>{
-        let newColumns = [...columns];
-        newColumns = applyDrag(newColumns,dropResult);
-
-        let newBoard = {...board};
-        newBoard.ColumnOrder = newColumns.map(column =>column.id);
-        newBoard.columns = newColumns;
-
-        setColumns(newColumns);
-        setBoard(newBoard);
-    }
     const onTaskDrop = (dropResult,columnId) => {
         if(dropResult.removedIndex !== null || dropResult.addedIndex !== null )
         {
