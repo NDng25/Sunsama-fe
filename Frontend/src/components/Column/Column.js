@@ -38,6 +38,7 @@ const Column = (props) => {
             return(
                 <Draggable key = {task.id}>
                     <Task
+                        key = {task.id}
                         task={task}
                     />
                 </Draggable>
@@ -54,6 +55,7 @@ const Column = (props) => {
                 <header className="column-drag-handle">
                         {column.title}
                 </header>
+                <div className="date_column">  {column.describe}  </div>
                 {isShowAddNewTask === true &&
                     <div className='add-new-task'>
                     <textarea

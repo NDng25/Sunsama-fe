@@ -26,7 +26,8 @@ const BoardContent = ()  =>{
                     let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD"));
                     dataColumn.push({
                         id:date.format("YYYY-MM-DD"),
-                        title: date.format("YYYY-MM-DD"),
+                        title: date.format("dddd"),
+                        describe: date.format("MMMM Do"),
                         tasks:res.data
                     });
                     date.add(1, 'day');
@@ -83,34 +84,19 @@ const BoardContent = ()  =>{
     const setColumnInBoard = (columns) => {
         return ( columns && columns.length > 0 && columns.map((column  ,index) =>{
             return (
-                <Draggable key = {column.id}>
                     <Column
+                        key = {column.id}
                         column = {column}
                         onTaskDrop = {onTaskDrop}
                         AddNewTask = {AddNewTask}
                     />
-                </Draggable>
             )
         }))
     }
     return (
-        <>
             <div className="board-columns">
-                <Container
-                    orientation="horizontal"
-                    onDrop={onColumnDrop}
-                    getChildPayload={index =>columns[index]}
-                    dragHandleSelector=".column-drag-handle"
-                    dropPlaceholder={{
-                        animationDuration: 150,
-                        showOnTop: true,
-                        className: 'cards-drop-preview'
-                    }}
-                >
-                    {setColumnInBoard(columns)}
-                </Container>
+                {setColumnInBoard(columns)}
             </div>
-        </>
     )
 }
 export default BoardContent
