@@ -22,15 +22,22 @@ const BoardContent = ()  =>{
     const [columns, setColumns] = useState([]);
     const [searchParam, setSearchParams] = useSearchParams();
     const [ReLoadBoardContent, setReLoadBoardContent] = useState(false);
-    useEffect(()=>{console.log("change",searchParam)},[searchParam])
+    useEffect(()=>{
+        setReLoadBoardContent(true);
+    },[searchParam])
     useEffect(() => {
         const fetchHashTags = async () => {
             try{
+                const idHashtag=searchParam.get('hashtag');
+                const valueDate=searchParam.get('date');
+                console.log("idHashTag"+idHashtag+" date: "+valueDate);
+                let bonusCondition = '';
+                if(idHashtag!= null && idHashtag!= 0) { bonusCondition = '?hashtagId='+idHashtag;}
                 let dataColumn = [];
-                const date = moment();
+                const date = moment(valueDate,'DD-MM-YYYY');
                 for (let i=0;i<3;i++)
                 {
-                    let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD"));
+                    let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD")+bonusCondition);
                     dataColumn.push({
                         id:date.format("YYYY-MM-DD"),
                         title: date.format("dddd"),

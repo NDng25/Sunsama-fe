@@ -65,7 +65,9 @@ const Hashtag = (props) => {
       });
   };
   const findByHashtag = (e) => {
-    setSearchParams({ hashtag: e });
+    const date= searchParam.get('date');
+    setSearchParams({ hashtag: e,
+      date:date });
   };
   useEffect(() => {
     getData();
