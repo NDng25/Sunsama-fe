@@ -33,8 +33,8 @@ const Task = (props)=>{
     };
     const onCheckSubTask = async (id_subtask,status_subtask) => {
         try {
-            await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
             if(status_subtask == false) setCheck(false);
+            await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
         }
         catch (e) {
             alert(e);
