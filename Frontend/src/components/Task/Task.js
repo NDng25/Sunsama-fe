@@ -42,6 +42,9 @@ const Task = (props)=>{
     function OpenFormTaskDetail() {
         window.location.replace(`/task-detail/`+task.id);
     }
+    function unCheckTask() {
+        setCheck(false);
+    }
     return (
             <div className="task-item">
                 <div className="header-task">
@@ -63,6 +66,7 @@ const Task = (props)=>{
                             subtask = {subtask}
                             onCheckSubTask = {onCheckSubTask}
                             isTaskCompleted = {check}
+                            unCheckTask = {unCheckTask}
                         />
                     )
                 })}
