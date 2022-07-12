@@ -1,7 +1,5 @@
 @import'../../settings';
-.board{
-  .board-columns {
-    display: flex;
-    overflow-x: auto;
-  }
+.board-columns {
+  display: flex;
+  overflow-x: auto;
 }

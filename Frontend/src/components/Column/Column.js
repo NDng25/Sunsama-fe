@@ -38,6 +38,7 @@ const Column = (props) => {
             return(
                 <Draggable key = {task.id}>
                     <Task
+                        key = {task.id}
                         task={task}
                     />
                 </Draggable>
