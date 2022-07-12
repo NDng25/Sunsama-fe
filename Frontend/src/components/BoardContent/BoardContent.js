@@ -7,6 +7,7 @@ import axios from "axios";
 import {BASE_URL} from "../../index";
 import moment from "moment";
 import FormTaskDetail from "../FormTaskDetail/FormTaskDetail";
+import task from "../Task/Task";
 const axiosHeaders =  {
     'Content-Type': 'application/json',
     'Accept':'*/*'
@@ -62,6 +63,7 @@ const BoardContent = ()  =>{
     const onTaskDrop = (dropResult,columnId) => {
         if(dropResult.removedIndex !== null || dropResult.addedIndex !== null )
         {
+            ChangeDateOfTask(dropResult.payload,columnId);
             let newColumns = [...columns];
             let currentColumn = newColumns.find(column => column.id === columnId);
             currentColumn.tasks = applyDrag(currentColumn.tasks,dropResult);
@@ -69,7 +71,15 @@ const BoardContent = ()  =>{
             setColumns(newColumns)
         }
     }
-
+    const ChangeDateOfTask = (task, dateChange) => {
+        const changeDate = async (id_task,dateChange) => {
+            const updateDate = {
+                "newDate": dateChange
+            }
+            await axios.put(`${BASE_URL}/tasks/`+id_task+`/change_date/`,updateDate);
+        }
+        if(task.date.slice(0,10) != dateChange) changeDate(task.id,dateChange);
+    }
     const setColumnInBoard = (columns) => {
         return ( columns && columns.length > 0 && columns.map((column  ,index) =>{
             return (

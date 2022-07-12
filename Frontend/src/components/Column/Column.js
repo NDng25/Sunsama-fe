@@ -85,8 +85,7 @@ const Column = (props) => {
                         {...column.props}
                         groupName="col"
                         onDrop={(dropResult) => onTaskDrop(dropResult,column.id)}
-                        getChildPayload={index => tasks[index]
-                        }
+                        getChildPayload={index => tasks[index]}
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"
                         dropPlaceholder={{
