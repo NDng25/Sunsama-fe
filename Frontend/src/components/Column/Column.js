@@ -3,11 +3,12 @@ import './Column.scss';
 import Task from "../Task/Task";
 import {Container,Draggable} from "react-smooth-dnd";
 import {FormatDateToAdd} from "../../utilities/formatDate";
+import {useSearchParams} from "react-router-dom";
 const Column = (props) => {
     const [isShowAddNewTask , setIsShowAddNewTask] = useState(false);
     const textAreaRef = useRef(null);
     const [valueTextArea,setValueTextArea] = useState("");
-
+    const [searchParam, setSearchParams] = useSearchParams();
     const { column ,onTaskDrop ,AddNewTask} = props;
     const tasks = column.tasks;
     useEffect(()=>{
@@ -18,12 +19,13 @@ const Column = (props) => {
     function handleAddNewTask () {
         if(valueTextArea != null){
             const dateTask = new Date(column.id);
+            const idHashtag=searchParam.get('hashtag');
             const newTask = {
                 "title": valueTextArea,
                 "describe": "",
                 "date": FormatDateToAdd(dateTask)+" 00:00:00",
                 "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
-                "hashtagsId": [],
+                "hashtagsId": [idHashtag],
                 "isStatus": false,
                 "parentId": 0,
                 "userId": 1
