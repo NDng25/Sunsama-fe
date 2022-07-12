@@ -6,7 +6,7 @@ const MainBoard = () => {
     return (
         <div className='main-board'>
             <FilterColumn/>
-            <BoardContent/>
+            <BoardContent />
         </div>
     )
 }
