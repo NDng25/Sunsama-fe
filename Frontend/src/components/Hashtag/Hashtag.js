@@ -21,7 +21,6 @@ const Hashtag = (props) => {
   const generateColor = () => {
     return "#" + Math.random().toString(16).substr(-6);
   };
-  // useEffect(()=>{console.log("change",searchParam)},[searchParam])
   const [listHashtag, setChannel] = useState([]);
   const getData = () => {
     fetch(BASE_URL + "/hashtags")

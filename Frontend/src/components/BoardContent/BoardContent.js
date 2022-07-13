@@ -34,10 +34,8 @@ const BoardContent = ()  =>{
                 if(idHashtag && idHashtag!= 0 && idHashtag != 'null') {bonusCondition = '?hashtagId='+idHashtag;}
                 let dataColumn = [];
                 const date = moment(valueDate,'DD-MM-YYYY');
-                console.log(date);
                 for (let i=0;i<3;i++)
                 {
-                    console.log(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD")+bonusCondition);
                     let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD")+bonusCondition);
                     dataColumn.push({
                         id:date.format("YYYY-MM-DD"),
@@ -50,7 +48,7 @@ const BoardContent = ()  =>{
                 setColumns(dataColumn);
             }
             catch (e){
-                console.log(e);
+                alert(e);
             }
             setReLoadBoardContent(false);
         }
@@ -58,12 +56,11 @@ const BoardContent = ()  =>{
     },[ReLoadBoardContent]);
     const AddNewTask = async (newTask) => {
         try{
-            console.log(newTask);
             await axios.post(`${BASE_URL}/tasks/`,newTask,{headers:axiosHeaders});
             setReLoadBoardContent(true);
         }
         catch (e){
-            console.log(e);
+            alert(e);
         }
     }
     const onTaskDrop = (dropResult,columnId) => {
