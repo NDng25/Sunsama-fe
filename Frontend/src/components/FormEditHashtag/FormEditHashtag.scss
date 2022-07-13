@@ -1,0 +1,41 @@
+@import '../../_settings';
+
+.edit-hashtag-form{
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  text-align: center;
+  background-color: white;
+  width: $width-form-add-hashtag;
+  // margin-left: calc(50% - #{$width-form-add-hashtag/2});
+  margin-right: calc(50% - #{$width-form-add-hashtag/2});
+  margin-top: 50px;
+  padding:10px 10px 10px 10px;
+  border-radius: $task-border-radius;
+  box-shadow: 0 1px 1px rgba(0,0,0,1);
+  .input-name{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+}
+
+.edit-hashtag-form button{
+  display: flex;
+  justify-content: center;
+  align-items:  center;
+  padding: 10px 0px 10px 0px !important;
+  width: 80px !important;
+  height: 20px !important;
+  margin-left: 10px !important;
+}
+
+.edit-hashtag-group-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit-hashtag-input{
+  height: 30px;
+}

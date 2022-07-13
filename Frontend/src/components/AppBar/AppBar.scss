@@ -2,7 +2,42 @@
 .navbar-app {
   font-size: 1.5rem;
   background-color: $navbar-app-bg-color;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2) !important;
   padding-left: $gap;
+  box-sizing: border-box;
   display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  border-bottom: 0.9px solid #cfcfcf;
+  padding: 0px;
+}
+
+.app-logo{
+  width: 35px;
+  height: 35px;
+  padding: 0px;
+  margin: 10px;
+}
+
+.app-title{
+  display: inline-flex;
   align-items: center;
+  justify-items: center;
+  padding: 0px !important;
+}
+
+.logo-btn{
+  padding: 0px;
+  margin: 0px 10px 0px 10px;
+  width: 80px;
+  border-radius: 8px !important;
+  background-color: inherit;
+  border: none;
+}
+.logo-btn:hover
+{
+  transition: ease-in;
+  border-radius: 8px;
+  background-color: rgb(218, 218, 218);
+  border: none;
 }

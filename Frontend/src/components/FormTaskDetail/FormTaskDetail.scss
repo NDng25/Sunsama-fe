@@ -1,25 +1,37 @@
 @import '../../_settings';
-body {
-  background: rgba(0,0,0,0.6);
-  min-height: fit-content;
+// body {
+//   background: rgba(236, 231, 231, 0.6) !important;
+//   min-height: fit-content;
+//   width: 100vw;
+//   height: 100vh;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   position: fixed;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+.edit-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.932);
   width: 100vw;
   height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
 }
 .body-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   text-align: center;
   background-color: white;
-  width: $width-form-add-hashtag;
-  margin-left: calc(50% - #{$width-form-add-hashtag/2});
-  margin-right: calc(50% - #{$width-form-add-hashtag/2});
-  margin-top: 50px;
-  padding:10px 10px 10px 10px;
+  width: 600px;
+  height: 650px !important;
+  padding:10px 40px 15px 40px;
   border-radius: $task-border-radius;
-  box-shadow: 0 1px 1px rgba(0,0,0,1);
+  box-shadow: 2px 2px 14px rgb(170, 169, 169);
   .input-title{
     display: flex;
     padding-top: 10px;
@@ -30,6 +42,15 @@ body {
     display: flex;
     text-align: left;
     justify-content: space-between;
+  }
+  .date-task{
+    display: flex;
+    text-align: right;
+    justify-content: space-between;
+    align-items: center;
+    label{
+      text-align: left;
+    }
   }
   .list-hashtag{
     font-size:16px;
@@ -53,56 +74,101 @@ body {
     }
   }
 
-  .date-task{
-    margin-top: 10px;
-    margin-bottom:10px;
-    display: flex;
-    justify-content: space-between;
-    .name-date{
-      width: 120px;
-      text-align: left;
-    }
-    .date{
-      margin-left: 60px;
-    }
-    .add-action{
-      font-weight: normal;
-    }
-  }
   .due-date{
-    margin-top: 10px;
-    margin: bottom 10px;
     display: flex;
+    text-align: right;
+    align-items: center;
     justify-content: space-between;
-    .name-duedate{
-      width: 100px;
+    label{
       text-align: left;
-    }
-    .duedate{
-      margin-left: 70px;
     }
   }
   .add-new-subtask{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: 10px ;
     font-weight: normal;
     font-size: 14px;
   }
   .buttons{
-    justify-content:space-between;
-    padding-top: 20px;
+    display: flex;
+    justify-content:space-evenly;
     .save-button{
-      color: gray;
-      margin-right: 50px ;
+      background-color: rgba(127, 255, 212, 0.315);
     }
     .cancel-button{
-      .return-dashboard{
-        text-decoration: none;
-      }
+      background-color: aliceblue;
     }
     .delete-button{
-      margin-left: 50px ;
+      background-color: rgba(255, 0, 0, 0.349);
     }
   }
+}
+
+.body-form button{
+  width: 70px;
+  height: 30px;
+  border: 2px solid salmon;
+  border-radius: 4px !important;
+}
+
+.body-form button:hover{
+  transform: translateX(-3px);
+  transform: translateY(-3px);
+  box-shadow: 2px 2px 7px salmon;
+  transition: ease-out;
+}
+
+.body-form input{
+  height: 25px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #000000 !important;
+}
+
+.body-form input:focus{
+  border: 1px solid #6acefc !important;
+  outline: #6acefc;
+  box-shadow: 1px 1px 3px #6acefc;
+}
+
+.body-form label{
+  text-align: left;
+  width: 100px;
+}
+
+.body-form div{
+  padding: 5px 0px 5px 0px;
+}
+
+.body-form textarea{
+  width: 270px;
+  height: 25px;
+  text-align: start;
+  color: rgb(88, 88, 88);
+  font-size: 1.07em !important;
+  font-weight: 400 !important;
+  border: 1px solid #7c7c7c;
+  border-radius: 5px;
+  overflow: auto;
+  resize: none;
+  overflow-y: hidden;
+}
+
+.body-form textarea:focus{
+  outline: #6acefc;
+  box-shadow: 1px 1px 3px #6acefc;
+}
+
+.searchBox{
+  width: 60px !important;
+  text-align: center;
+}
+
+.search-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }

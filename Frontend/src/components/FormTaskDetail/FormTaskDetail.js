@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import './FormTaskDetail.scss'
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import SubTask from "./SubTask/SubTask";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,6 +19,8 @@ const FormAddTaskDetail = () => {
     const [optionHashTags , setOptionHashTags] = useState([]);
     const [optionSelectedHashTags , setOptionSelectedHashTags] = useState([]);
     const [isReLoadListSubTasks,setReLoadSubTasks] = useState(false);
+    const navigate = useNavigate();
+    
     useEffect( () => {
         const fetchTasks = async () => {
             try {
@@ -108,10 +110,11 @@ const FormAddTaskDetail = () => {
         setReLoadSubTasks(true);
     }
     return (
+        <div className="edit-container">
         <div className="body-form" >
             <h2 className="Topic-form"> Task Detail</h2>
             <div  className="input-title">
-                <div>Title :</div>
+                <label>Title:</label>
                 <input
                     type="text"
                     name="name"
@@ -119,7 +122,7 @@ const FormAddTaskDetail = () => {
                     defaultValue = {task.title}/>
             </div>
             <div className="input-description">
-                <label className="name-description">Description : </label>
+                <label className="name-description">Description: </label>
                 <textarea
                     name="textValue"
                     id="valueDescribeTask"
@@ -127,14 +130,14 @@ const FormAddTaskDetail = () => {
                     defaultValue = {task.describe}/>
             </div>
             <div className="date-task">
-                <div className="name-date">Date of Task</div>
+                <label className="name-date">Date of Task</label>
                 <DatePicker className="date"
                             dateFormat="dd/MM/yyyy"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}/>
             </div>
             <div className="due-date">
-                <div className="name-duedate"> Due Day </div>
+                <label className="name-duedate"> Due Day </label>
                 <DatePicker
                             className="duedate"
                             dateFormat="dd/MM/yyyy"
@@ -142,8 +145,8 @@ const FormAddTaskDetail = () => {
                             onChange={(date) => setStartDueDate(date)} />
             </div>
             <div className="board-subtask">
-                <div>SubTask : </div>
-                <div className="list-hashtag">
+                <div><label>SubTask: </label></div>
+                <div className="detail-list-hashtag">
                     {subtasks && subtasks.length > 0 && subtasks.map((subtask  ,index) =>{
                         return (
                             <SubTask
@@ -156,13 +159,13 @@ const FormAddTaskDetail = () => {
                     })}
                     <div className='add-new-subtask'>
                         <div  className="name-subtask">
-                            Title : <input type="text" name="title" id="title-subtask"/>
+                            <label>Title: </label><input className="subtask-title-input" type="text" name="title" id="title-subtask"/>
                         </div>
                         <button className="add-button" onClick={AddNewSubTaskInTask}> Add </button>
                     </div>
                 </div>
-            <div className="list-hashtag">
-                <div>Hashtag : </div>
+            <div className="detail-list-hashtag">
+                <label>Channels: </label>
                 <Multiselect
                     displayValue="key"
                     options={optionHashTags}
@@ -174,11 +177,12 @@ const FormAddTaskDetail = () => {
             </div>
             <div className="buttons" >
                 <button className="save-button" onClick={AcceptChangeTask}> Save </button>
-                <button className="cancel-button">
-                    <Link to="/dashboard" className="return-dashboard">Cancel</Link>
+                <button className="cancel-button" onClick={() => navigate(-1)}>Cancel
+                    {/* <Link to="/dashboard" className="return-dashboard"></Link> */}
                 </button>
                 <button className="delete-button" onClick={DeleteTask}> Delete </button>
             </div>
+        </div>
         </div>
     )
 }

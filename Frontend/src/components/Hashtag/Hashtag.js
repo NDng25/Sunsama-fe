@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import {
   BrowserRouter as Router,
   Link,
@@ -18,9 +18,6 @@ import FormEditHashtag from "../FormEditHashtag/FormEditHashtag";
 const Hashtag = (props) => {
   const [deleteStatus, setDeleteStatus] = useState(true);
   const [searchParam, setSearchParams] = useSearchParams();
-  const generateColor = () => {
-    return "#" + Math.random().toString(16).substr(-6);
-  };
   const [listHashtag, setChannel] = useState([]);
   const getData = () => {
     fetch(BASE_URL + "/hashtags")
@@ -41,6 +38,7 @@ const Hashtag = (props) => {
       .put(`${BASE_URL}/hashtags/${e.id}`, e)
       .then((response) => {
         setDeleteStatus(!deleteStatus);
+        props.setHashtagChange(true);
       })
       .catch((error) => {
         alert(error.data);
@@ -50,6 +48,7 @@ const Hashtag = (props) => {
     axios.delete(BASE_URL + "/hashtags/" + e).then((response) => {
       if (response.data != null) {
         setDeleteStatus(!deleteStatus);
+        props.setHashtagChange(true);
       }
     });
   };
@@ -74,17 +73,18 @@ const Hashtag = (props) => {
   const loadHashtag = listHashtag.map((listHashtag) => {
     return (
       <ListGroupItem
-        onClick={() => findByHashtag(listHashtag.id)}
+        tabIndex={0}
+        onClick={(e) => findByHashtag(listHashtag.id)}
         className="d-flex sub-hash-tag"
         key={listHashtag.id}
       >
-        <p style={{ color: generateColor() }}># </p>
+        <p style={{ color: 'salmon' }}># </p>
         <p>{listHashtag.name}</p>
         {listHashtag.id ? (
           <div className="ml-auto active">
             <Popup
               trigger={
-                <button className="popup_btn">
+                <button className="popup_edit_btn">
                   <AiFillEdit />
                 </button>
               }
@@ -99,6 +99,7 @@ const Hashtag = (props) => {
               </div>
             </Popup>
             <Button
+              className="popup_delete-btn"
               color="white"
               size="sm"
               onClick={() => deleteHashtag(listHashtag.id)}
@@ -118,7 +119,7 @@ const Hashtag = (props) => {
         </div>
 
         <Popup
-          trigger={<button> + Manage Channels</button>}
+          trigger={<button className="add-popup-btn"> + Add Channels</button>}
           position="top left"
         >
           <div className="popup">

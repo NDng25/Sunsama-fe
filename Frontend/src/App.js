@@ -5,7 +5,6 @@ function App() {
     return (
         <div className="sunsame-clone">
             <AppBar/>
-            <BoardBar/>
             <MainBoard/>
         </div>
     );

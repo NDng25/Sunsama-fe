@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import'./FilterColumn.scss';
-import Calendar from 'react-calendar';
 import Hashtag from "../Hashtag/Hashtag";
 import {FormatDateToAdd} from "../../utilities/formatDate";
 import {useSearchParams} from "react-router-dom";
-const FilterColumn = () =>{
+import {Calendar} from "react-calendar";
+const FilterColumn = (props) =>{
     const [value, onChange] = useState(new Date());
     const [searchParam, setSearchParams] = useSearchParams();
         useEffect(() => {
@@ -22,8 +22,11 @@ const FilterColumn = () =>{
                           selectRange={false}
                           minDetail="month"
                 />
-                <div className="list-hashtag"> Channels
-                <Hashtag/>           
+                <div className="list-hashtag"> 
+                <label className="hashtag-label" >Channels</label>
+                <Hashtag
+                    setHashtagChange={(value) => props.setHashtagChange(value)}
+                />           
                 </div>
             </div>
     )
