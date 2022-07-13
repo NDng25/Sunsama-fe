@@ -45,7 +45,6 @@ const FormAddTaskDetail = () => {
                 });
                 setOptionHashTags(options);
             } catch (e) {
-                alert(e);
             }
         }
             fetchTasks();
@@ -91,34 +90,22 @@ const FormAddTaskDetail = () => {
                 "title": document.getElementById('title-subtask').value,
                 "describe":''
             }
-            try{
-                await axios.post(`${BASE_URL}/tasks/` + idtask + '/subtasks',newSubTask);
-                setReLoadSubTasks(true);
-                document.getElementById('title-subtask').value = null;
-            }catch (e) {
-                alert(e);
-            }
+            await axios.post(`${BASE_URL}/tasks/` + idtask + '/subtasks',newSubTask);
+            setReLoadSubTasks(true);
+            document.getElementById('title-subtask').value = null;
         }
     }
     const onDeleteSubTask = async (id_delete_sub_task) => {
-        try{
-            await axios.delete(`${BASE_URL}/tasks/`+id_delete_sub_task);
-            setReLoadSubTasks(true);
-        }catch (e) {
-            alert(e);
-        }
+        await axios.delete(`${BASE_URL}/tasks/`+id_delete_sub_task);
+        setReLoadSubTasks(true);
     }
     const onUpdateSubTask = async (id_edit_subtask,title_edit_subtask) => {
         const editSubTask = {
             "title": title_edit_subtask,
             "describe": ''
         }
-        try{
-            await axios.put(`${BASE_URL}/tasks/`+id_edit_subtask,editSubTask);
-            setReLoadSubTasks(true);
-        }catch (e) {
-            alert(e);
-        }
+        await axios.put(`${BASE_URL}/tasks/`+id_edit_subtask,editSubTask);
+        setReLoadSubTasks(true);
     }
     return (
         <div className="body-form" >
