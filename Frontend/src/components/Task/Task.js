@@ -21,7 +21,7 @@ const Task = (props)=>{
                 setReLoadSubTask(false);
             }
             catch (e){
-                console.log(e);
+                alert(e);
             }
         }
         fetchSubTasks();

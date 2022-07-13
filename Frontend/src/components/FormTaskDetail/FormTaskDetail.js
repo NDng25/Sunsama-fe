@@ -45,7 +45,7 @@ const FormAddTaskDetail = () => {
                 });
                 setOptionHashTags(options);
             } catch (e) {
-                console.log(e);
+                alert(e);
             }
         }
             fetchTasks();
