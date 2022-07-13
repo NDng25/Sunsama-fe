@@ -17,7 +17,7 @@ const axiosHeaders =  {
     'Content-Type': 'application/json',
     'Accept':'*/*'
     }
-const BoardContent = ()  =>{
+const BoardContent = (props)  =>{
     const [board, setBoard] = useState({});
     const [columns, setColumns] = useState([]);
     const [searchParam, setSearchParams] = useSearchParams();
@@ -51,9 +51,10 @@ const BoardContent = ()  =>{
                 alert(e);
             }
             setReLoadBoardContent(false);
+            props.setHashtagChange(false);
         }
         fetchHashTags();
-    },[ReLoadBoardContent]);
+    },[ReLoadBoardContent, props.hashtagChange]);
     const AddNewTask = async (newTask) => {
         await axios.post(`${BASE_URL}/tasks/`,newTask,{headers:axiosHeaders});
         setReLoadBoardContent(true);

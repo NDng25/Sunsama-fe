@@ -13,6 +13,10 @@ li:hover {
   opacity: 0.8;
 }
 
+.hashtags-list-item li:focus{
+  background-color: rgba(250, 128, 114, 0.452);
+}
+
 .hashtags-list-item li {
   box-sizing: border-box;
   margin-left: -35px;

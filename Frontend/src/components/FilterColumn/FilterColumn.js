@@ -4,7 +4,7 @@ import Hashtag from "../Hashtag/Hashtag";
 import {FormatDateToAdd} from "../../utilities/formatDate";
 import {useSearchParams} from "react-router-dom";
 import {Calendar} from "react-calendar";
-const FilterColumn = () =>{
+const FilterColumn = (props) =>{
     const [value, onChange] = useState(new Date());
     const [searchParam, setSearchParams] = useSearchParams();
         useEffect(() => {
@@ -24,7 +24,9 @@ const FilterColumn = () =>{
                 />
                 <div className="list-hashtag"> 
                 <label className="hashtag-label" >Channels</label>
-                <Hashtag/>           
+                <Hashtag
+                    setHashtagChange={(value) => props.setHashtagChange(value)}
+                />           
                 </div>
             </div>
     )
