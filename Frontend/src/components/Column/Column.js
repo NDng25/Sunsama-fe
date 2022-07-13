@@ -19,17 +19,32 @@ const Column = (props) => {
     function handleAddNewTask () {
         if(valueTextArea != null){
             const dateTask = new Date(column.id);
-            const idHashtag=searchParam.get('hashtag');
-            const newTask = {
-                "title": valueTextArea,
-                "describe": "",
-                "date": FormatDateToAdd(dateTask)+" 00:00:00",
-                "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
-                "hashtagsId": [idHashtag],
-                "isStatus": false,
-                "parentId": 0,
-                "userId": 1
-            };
+            let idHashtag=searchParam.get('hashtag');
+            let newTask = '';
+            if(idHashtag!='null' && idHashtag != 0 ) {
+                newTask = {
+                    "title": valueTextArea,
+                    "describe": "",
+                    "date": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "hashtagsId": [idHashtag],
+                    "isStatus": false,
+                    "parentId": 0,
+                    "userId": 1
+                };
+            }
+            else {
+                newTask = {
+                    "title": valueTextArea,
+                    "describe": "",
+                    "date": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "hashtagsId": [],
+                    "isStatus": false,
+                    "parentId": 0,
+                    "userId": 1
+                };
+            }
             AddNewTask(newTask);
             setValueTextArea('');
             setIsShowAddNewTask(false);
