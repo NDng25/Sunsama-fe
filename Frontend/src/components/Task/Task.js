@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
 import {BASE_URL} from "../../index";
+import Checkbox from "../Checkbox/Checkbox";
 const Task = (props)=>{
     const { task } = props;
     //const subtasks = task.subtasks;
@@ -40,12 +41,19 @@ const Task = (props)=>{
     return (
             <div className="task-item">
                 <div className="header-task">
-                    <input
+                    {/* <input
                         type="checkbox"
-                        className="check-task checker"
+                        className="checker"
+                        checked= {check}
+                        onChange={handleTaskChange}
+                    /> */}
+                    <label>
+                    <Checkbox 
+                        className='checker'
                         checked= {check}
                         onChange={handleTaskChange}
                     />
+                    </label>
                     <div className="title-task" onClick={OpenFormTaskDetail}>{task.title}</div>
                     <Link to={`/task-detail/`+task.id}>
                         <AiOutlineInfoCircle className="info-task"/>
@@ -67,7 +75,7 @@ const Task = (props)=>{
                 <div className="hashtag-of-task">
                     {hashtags && hashtags.length > 0 && hashtags.map((hashtag ,index) =>{
                         return (
-                            <div>
+                            <div className="task-hashtag-label">
                                 #{hashtag.name}
                             </div>
                         )

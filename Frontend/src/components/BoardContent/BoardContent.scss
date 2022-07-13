@@ -1,5 +1,5 @@
 @import'../../settings';
 .board-columns {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
 }

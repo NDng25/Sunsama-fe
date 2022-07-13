@@ -1,32 +1,32 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './Column.scss';
 import Task from "../Task/Task";
-import {Container,Draggable} from "react-smooth-dnd";
-import {FormatDateToAdd} from "../../utilities/formatDate";
-import {useSearchParams} from "react-router-dom";
+import { Container, Draggable } from "react-smooth-dnd";
+import { FormatDateToAdd } from "../../utilities/formatDate";
+import { useSearchParams } from "react-router-dom";
 const Column = (props) => {
-    const [isShowAddNewTask , setIsShowAddNewTask] = useState(false);
+    const [isShowAddNewTask, setIsShowAddNewTask] = useState(false);
     const textAreaRef = useRef(null);
-    const [valueTextArea,setValueTextArea] = useState("");
+    const [valueTextArea, setValueTextArea] = useState("");
     const [searchParam, setSearchParams] = useSearchParams();
-    const { column ,onTaskDrop ,AddNewTask} = props;
+    const { column, onTaskDrop, AddNewTask } = props;
     const tasks = column.tasks;
-    useEffect(()=>{
-        if(isShowAddNewTask === true){
+    useEffect(() => {
+        if (isShowAddNewTask === true) {
             textAreaRef.current.focus();
         }
-    },[isShowAddNewTask])
-    function handleAddNewTask () {
-        if(valueTextArea != null){
+    }, [isShowAddNewTask])
+    function handleAddNewTask() {
+        if (valueTextArea != null) {
             const dateTask = new Date(column.id);
-            let idHashtag=searchParam.get('hashtag');
+            let idHashtag = searchParam.get('hashtag');
             let newTask = '';
-            if(idHashtag!='null' && idHashtag != 0 ) {
+            if (idHashtag != 'null' && idHashtag != 0) {
                 newTask = {
                     "title": valueTextArea,
                     "describe": "",
-                    "date": FormatDateToAdd(dateTask)+" 00:00:00",
-                    "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "date": FormatDateToAdd(dateTask) + " 00:00:00",
+                    "dueDate": FormatDateToAdd(dateTask) + " 00:00:00",
                     "hashtagsId": [idHashtag],
                     "isStatus": false,
                     "parentId": 0,
@@ -37,8 +37,8 @@ const Column = (props) => {
                 newTask = {
                     "title": valueTextArea,
                     "describe": "",
-                    "date": FormatDateToAdd(dateTask)+" 00:00:00",
-                    "dueDate": FormatDateToAdd(dateTask)+" 00:00:00",
+                    "date": FormatDateToAdd(dateTask) + " 00:00:00",
+                    "dueDate": FormatDateToAdd(dateTask) + " 00:00:00",
                     "hashtagsId": [],
                     "isStatus": false,
                     "parentId": 0,
@@ -51,11 +51,11 @@ const Column = (props) => {
         }
     }
     const setTaskInColumn = (tasks) => {
-        return (tasks && tasks.length > 0 && tasks.map((task,index)=>{
-            return(
-                <Draggable key = {task.id}>
+        return (tasks && tasks.length > 0 && tasks.map((task, index) => {
+            return (
+                <Draggable key={task.id}>
                     <Task
-                        key = {task.id}
+                        key={task.id}
                         task={task}
                     />
                 </Draggable>
@@ -63,31 +63,38 @@ const Column = (props) => {
         }))
     }
     function ShowAddNewTask(e) {
-        if(isShowAddNewTask === true) setIsShowAddNewTask(false);
+        if (isShowAddNewTask === true) setIsShowAddNewTask(false);
         else setIsShowAddNewTask(true);
     }
     return (
         <>
             <div className="column">
                 <header className="column-drag-handle">
-                        {column.title}
+                    {column.title}
                 </header>
                 <div className="date_column">  {column.describe}  </div>
                 {isShowAddNewTask === true &&
                     <div className='add-new-task'>
-                    <textarea
-                        rows="1"
-                        className='form-control'
-                        placeholder='Enter a title for this task'
-                        ref={textAreaRef}
-                        value={valueTextArea}
-                        onChange={(event) => setValueTextArea(event.target.value)}
-                    ></textarea>
+                        <div className="input-form">
+                            <textarea
+                                rows="1"
+                                className='form-control'
+                                placeholder="Task's title..."
+                                ref={textAreaRef}
+                                value={valueTextArea}
+                                onChange={(event) => setValueTextArea(event.target.value)}
+                            ></textarea>
+                        </div>
                         <div className='group-btn'>
                             <button className='btn btn-success' onClick={handleAddNewTask}>
                                 Add Task
                             </button>
-                            <i className='fa fa-times icon' onClick={ShowAddNewTask}></i>
+                            {/* <i className='fa fa-times icon' onClick={ShowAddNewTask}></i> */}
+                            <div class="close-container" onClick={handleAddNewTask}>
+                                <div class="leftright"></div>
+                                <div class="rightleft"></div>
+                                <label class="close">close</label>
+                            </div>
                         </div>
                     </div>
                 }
@@ -103,7 +110,7 @@ const Column = (props) => {
                     <Container
                         {...column.props}
                         groupName="col"
-                        onDrop={(dropResult) => onTaskDrop(dropResult,column.id)}
+                        onDrop={(dropResult) => onTaskDrop(dropResult, column.id)}
                         getChildPayload={index => tasks[index]}
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"

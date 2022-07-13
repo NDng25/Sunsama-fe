@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import './FormAddHashtag.scss';
 const FormAddHashtag = (props) => {
   const { onCreateHashtag,modalVisible} = props;
   const [name, setName] = useState("");
@@ -23,19 +24,20 @@ const FormAddHashtag = (props) => {
   {
     if(isVisible){
         return (
-            <Form  className="bg-dark" onSubmit={onSubmit}>
+            <Form  className="add-hashtag-form" onSubmit={onSubmit}>
               <FormGroup>
-                <Label>Name</Label>
+                <Label>Channel</Label>
                 <Input
+                className="add-hashtag-input"
                   type="text"
                   value={name}
                   onChange={onChange}
                   name="name"
-                  placeholder="Enter hashtag"
+                  placeholder="Channel title..."
                   required
                 ></Input>
               </FormGroup>
-              <div className="col d-flex justify-content-center">
+              <div className="add-hashtag-group-btn">
                 <Button type="submit">Submit</Button>
                 <Button onClick={handleClick} className="btn btn-danger ml-2">
                   Cancel

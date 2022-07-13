@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import './FormEditHashtag.scss';
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../index";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 const FormEditHashtag = (props) => {
   const { onEditHashtag, modalVisible, id } = props;
-  const [name, setName] = useState({});
+  const [name, setName] = useState("");
   const [isVisible, setIsVisible] = useState(modalVisible);
   const getData = () => {
     fetch(`${BASE_URL}/hashtags/${id}`)
@@ -39,19 +39,20 @@ const FormEditHashtag = (props) => {
   };
   if (isVisible) {
     return (
-      <Form className="bg-dark" onSubmit={onSubmit}>
+      <Form className="edit-hashtag-form" onSubmit={onSubmit}>
         <FormGroup>
-          <Label>Name hashtag</Label>
+          <Label>Channel title</Label>
           <Input
+            className="edit-hashtag-input"
             type="text"
             value={name}
             onChange={onChange}
             name="name"
-            placeholder="Enter hashtag"
+            placeholder=""
             required
           ></Input>
         </FormGroup>
-        <div className="col d-flex justify-content-center">
+        <div className="edit-hashtag-group-btn">
           <Button type="submit">Edit</Button>
           <Button
             onClick={handleClick}

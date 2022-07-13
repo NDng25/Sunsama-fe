@@ -78,13 +78,13 @@ const Hashtag = (props) => {
         className="d-flex sub-hash-tag"
         key={listHashtag.id}
       >
-        <p style={{ color: generateColor() }}># </p>
+        <p style={{ color: 'salmon' }}># </p>
         <p>{listHashtag.name}</p>
         {listHashtag.id ? (
           <div className="ml-auto active">
             <Popup
               trigger={
-                <button className="popup_btn">
+                <button className="popup_edit_btn">
                   <AiFillEdit />
                 </button>
               }
@@ -99,6 +99,7 @@ const Hashtag = (props) => {
               </div>
             </Popup>
             <Button
+              className="popup_delete-btn"
               color="white"
               size="sm"
               onClick={() => deleteHashtag(listHashtag.id)}
@@ -118,7 +119,7 @@ const Hashtag = (props) => {
         </div>
 
         <Popup
-          trigger={<button> + Manage Channels</button>}
+          trigger={<button className="add-popup-btn"> + Add Channels</button>}
           position="top left"
         >
           <div className="popup">

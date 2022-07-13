@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './SubTask.scss';
+import Checkbox from "../Checkbox/Checkbox";
 const SubTask = (props)=>{
     const { subtask , onCheckSubTask , isTaskCompleted } = props;
     const [checkSubTask, setCheckSubTask] = useState(subtask.status);
@@ -12,12 +13,18 @@ const SubTask = (props)=>{
     };
     return (
         <div className="subtask-item">
-            <input
+            {/* <input
                 type="checkbox"
                 className="check-subtask checker"
                 checked={checkSubTask}
                 onChange={handleSubTaskChange}
+            /> */}
+            <label>
+            <Checkbox 
+                checked={checkSubTask}
+                onChange={handleSubTaskChange}
             />
+            </label>
             {subtask.title}
         </div>
     )
