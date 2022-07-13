@@ -27,13 +27,13 @@
 
     /* Handle */
     &::-webkit-scrollbar-thumb {
-      background: whitesmoke;
+      background: rgb(223, 222, 222);
       border-radius: 10px;
     }
 
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-      background: #b30000;
+      background: rgb(175, 175, 175);;
     }
   }
   header {

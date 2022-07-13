@@ -6,6 +6,9 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
   font-size: 14px;
   line-height: 1.3em;
 }
@@ -32,6 +35,6 @@ body {
 ::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #d6d6d6;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.384);
+	background-color: #b9b9b9;
 }

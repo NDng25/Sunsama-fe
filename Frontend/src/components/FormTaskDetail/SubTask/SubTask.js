@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './SubTask.scss';
 import {Form} from "react-bootstrap";
-import {AiOutlineDelete, AiOutlineEdit, FaDotCircle} from "react-icons/all";
+import {AiOutlineDelete, AiOutlineEdit, FiPlay} from "react-icons/all";
 const SubTask = (props) =>{
     const { subtask ,onUpdateSubTask,onDeleteSubTask} = props;
     const [TitleSubTask, setTitleSubTask] = useState("");
@@ -28,7 +28,7 @@ const SubTask = (props) =>{
     }
     return (
         <div className="subtask-item">
-            >
+            <FiPlay className="subtask-icon"/>
             <Form.Control
             size={"sm"}
             type="text"

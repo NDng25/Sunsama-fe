@@ -1,5 +1,6 @@
 @import'../../settings';
 .board-columns {
   display: flex;
-  overflow-x: scroll;
+  max-width: 100%;
+  overflow-x: scroll !important;
 }
