@@ -15,14 +15,9 @@ const Task = (props)=>{
     const [isReLoadSubTask , setReLoadSubTask] = useState(false);
     useEffect(() => {
         const fetchSubTasks= async () => {
-            try{
                 let res = await axios.get(`${BASE_URL}/tasks/`+task.id+'/subtasks');
                 setSubTasks(res.data);
                 setReLoadSubTask(false);
-            }
-            catch (e){
-                alert(e);
-            }
         }
         fetchSubTasks();
     },[isReLoadSubTask]);
@@ -37,7 +32,6 @@ const Task = (props)=>{
             await axios.post(`${BASE_URL}/tasks/`+id_subtask+'/complete');
         }
         catch (e) {
-            alert(e);
         }
     }
     function OpenFormTaskDetail() {
