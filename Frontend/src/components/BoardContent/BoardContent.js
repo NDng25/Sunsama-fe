@@ -33,7 +33,7 @@ const BoardContent = (props)  =>{
             if(idHashtag && idHashtag!= 0 && idHashtag != 'null') {bonusCondition = '?hashtagId='+idHashtag;}
             let dataColumn = [];
             const date = moment(valueDate,'DD-MM-YYYY');
-            for (let i=0;i<4;i++)
+            for (let i=0;i<7;i++)
             {
                 let res = await axios.get(`${BASE_URL}/tasks/date/`+date.format("YYYY-MM-DD")+bonusCondition);
                 dataColumn.push({

@@ -16,6 +16,13 @@ const Column = (props) => {
             textAreaRef.current.focus();
         }
     }, [isShowAddNewTask])
+
+    const checkPastDay = () => {
+        const columnDate = new Date(column.id);
+        const currentDate = new Date();
+        return columnDate.getDate() >= currentDate.getDate();
+    }
+
     function handleAddNewTask() {
         if (valueTextArea != null) {
             const dateTask = new Date(column.id);
@@ -98,7 +105,7 @@ const Column = (props) => {
                         </div>
                     </div>
                 }
-                {isShowAddNewTask === false &&
+                {isShowAddNewTask === false && checkPastDay() &&
                     <footer>
                         <div className="footer-action" onClick={ShowAddNewTask}>
                             <i className='fa fa-plus icon' >
