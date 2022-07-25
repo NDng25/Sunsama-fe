@@ -55,7 +55,9 @@ body {
   .react-calendar { 
     width: 230px !important;
     max-width: 100% !important;
+    min-width: 230px;
     height: 255px !important;
+    min-height: 250px;
     max-height: 33% !important;
     background-color: #fff !important;
     padding: 10px !important;

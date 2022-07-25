@@ -75,7 +75,7 @@ const FormAddTaskDetail = () => {
             "userId": task.userId
         }
         await axios.put(`${BASE_URL}/tasks/` + idtask + '/',edit_task);
-        window.location.replace('/dashboard');
+        navigate(-1);
     }
     function ChangeSelectedHashTags(data){
         setOptionSelectedHashTags(data)
@@ -83,7 +83,7 @@ const FormAddTaskDetail = () => {
     const DeleteTask = async () => {
         if(window.confirm("Do you want to delete this task ?") == true){
             await axios.delete(`${BASE_URL}/tasks/` + idtask + '/');
-            window.location.replace('/dashboard');
+            navigate(-1);
         }
     }
     const AddNewSubTaskInTask = async () => {
